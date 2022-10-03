@@ -8,12 +8,21 @@ import serial
 import pynmea2
 from collections import OrderedDict
 
+import json
 
-dataFolder = mD.dataFolder
-gpsPort    =  mD.gpsPort
+dataFolder     = mD.dataFolder
+gpsPort        = mD.gpsPort
+statusJsonFile = mD.statusJsonFile
 
 baudRate  = 9600
 
+
+def gpsToggle():
+    
+    with open(statusJsonFile, 'r') as f:
+        data = json.load(f)
+    print(data)
+    
 
 
 
