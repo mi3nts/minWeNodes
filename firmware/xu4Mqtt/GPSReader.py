@@ -55,17 +55,19 @@ def main():
         try:
             for c in ser.read():
                 line.append(chr(c))
-                if chr(c) == '\n' and gpsToggle():
+                if chr(c) == '\n':
                     dataString     = (''.join(line))
                     dateTime  = datetime.datetime.now()
-
+                    
                     if (dataString.startswith("$GPGGA") and mSR.getDeltaTime(lastGPGGA,delta)):
-                        lastGPGGA = time.time()
-                        mSR.GPSGPGGA2Write(dataString,dateTime)
+                        if gpsToggle():
+                            lastGPGGA = time.time()
+                            mSR.GPSGPGGA2Write(dataString,dateTime)
                         
                     if (dataString.startswith("$GPRMC") and mSR.getDeltaTime(lastGPRMC,delta)):
-                        lastGPRMC = time.time()
-                        mSR.GPSGPRMC2Write(dataString,dateTime)
+                        if gpsToggle():    
+                            lastGPRMC = time.time()
+                            mSR.GPSGPRMC2Write(dataString,dateTime)
                        
                     line = []
                     break
