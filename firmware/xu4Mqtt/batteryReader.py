@@ -13,8 +13,6 @@ def main():
             dateTime          = datetime.datetime.now()
             batteryLevelRaw   = wpi.analogRead(25)
             referenceLevelRaw = wpi.analogRead(29)
-            time.sleep(30)
-
             batteryLevel          = batteryLevelRaw*(2.1*2)/(4095)
             batteryLevelPercetage = batteryLevel*(100/4.2)
     
@@ -25,8 +23,9 @@ def main():
                     ("batteryLevelPercetage"  ,str(batteryLevelPercetage)),
                     ("referenceLevelRaw"      ,str(referenceLevelRaw))
                     ])
-
+            
             mSR.sensorFinisher(dateTime,"MWBL001",sensorDictionary)
+            time.sleep(30)
 
 
         except Exception as e:
