@@ -25,7 +25,10 @@ def gpsToggle():
     except Exception as e:
             
         print(e)
-        print()
+        print("GPS Turned Off")
+        return False
+
+    
 
 
 
