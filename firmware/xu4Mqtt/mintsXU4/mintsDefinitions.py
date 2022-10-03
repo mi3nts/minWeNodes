@@ -89,7 +89,7 @@ dataFolderReference       = "/home/teamlary/mintsData/reference"
 dataFolderMQTTReference   = "/home/teamlary/mintsData/referenceMQTT"
 dataFolder                = "/home/teamlary/mintsData/raw"
 dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
-statusJsonFile            = "/home/teamlary/status/status.json"
+statusJsonFile            = "/home/teamlary/mintsData/status/status.json"
 
 
 duePort               = findDuePort()
