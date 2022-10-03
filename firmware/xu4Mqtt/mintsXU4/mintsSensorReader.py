@@ -37,8 +37,6 @@ latestOn       = mD.latestOn
 mqttOn         = mD.mqttOn
 
 
-
-
 def sensorFinisher(dateTime,sensorName,sensorDictionary):
     #Getting Write Path
     writePath = getWritePath(sensorName,dateTime)
@@ -395,7 +393,20 @@ def BME680Write(sensorData,dateTime):
             	("gas"          ,dataOut[3])
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
-        
+
+def BME280WriteI2c(sensorData):
+    
+    sensorName = "BME280"
+    dataLength = 5
+    if(len(sensorData) == dataLength):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,str(sensorData[0])), 
+        		("temperature"  ,sensorData[1]),
+            	("pressure"     ,sensorData[2]),
+                ("humidity"     ,sensorData[3]),
+            	("altitude"     ,sensorData[4])
+                ])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)      
         
 def BME280Write(sensorData,dateTime):
     dataOut    = sensorData.split(':')
@@ -431,6 +442,18 @@ def MGS001Write(sensorData,dateTime):
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
 
+def SCD30WriteI2c(sensorData):
+    sensorName = "SCD30"
+    dataLength = 4
+    if(len(sensorData) == (dataLength +1)):
+        sensorDictionary =  OrderedDict([
+                ("dateTime"     ,sensorData[0]),
+        		("c02"          ,sensorData[1]),
+            	("temperature"  ,sensorData[2]),
+                ("humidity"     ,sensorData[3]),
+                ])
+        sensorFinisher(sensorData[0],sensorName,sensorDictionary)
+
 def SCD30Write(sensorData,dateTime):
     dataOut    = sensorData.split(':')
     sensorName = "SCD30"
@@ -441,7 +464,6 @@ def SCD30Write(sensorData,dateTime):
         		("c02"          ,dataOut[0]),
             	("temperature"  ,dataOut[1]),
                 ("humidity"     ,dataOut[2]),
-
                 ])
         sensorFinisher(dateTime,sensorName,sensorDictionary)
 
