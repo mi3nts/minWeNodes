@@ -6,14 +6,27 @@ import netifaces as ni
 from collections import OrderedDict
 import netifaces as ni
 from requests import get
-
+import yaml
 from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions  as mD
 
 dataFolder = mD.dataFolder
 
+# This can be a list 
+wearablesFile   = mD.wearablesFile
+wearablesData   = yaml.load(open(wearablesFile))
+
+
+import os
+
 
 def main():
+    
+#192.168.1.10 is the ip address
+    ret = os.system("ping -o -c 3 -W 3000 192.168.1.10")
+    # while (os.system("ping -o -c 3 -W " + )):
+    #     print "pc still alive"
+
 
     sensorName = "IP"
     dateTimeNow = datetime.datetime.now()
