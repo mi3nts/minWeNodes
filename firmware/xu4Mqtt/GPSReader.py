@@ -21,7 +21,7 @@ def gpsToggle():
     try:    
         with open(statusJsonFile, 'r') as f:
             data = json.load(f)
-        print(data['gps'])
+
         return data['gps'] == "on" 
     except Exception as e:
             
