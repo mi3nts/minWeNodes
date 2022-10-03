@@ -100,11 +100,10 @@ latestDisplayOn       = False
 latestOn              = False
 airmarPort            = findAirmarPort()
 # For MQTT 
-mqttOn                    = True
+mqttOn                    = False
 mqttCredentialsFile      = 'mintsXU4/credentials.yml'
 mqttBroker               = "mqtt.circ.utdallas.edu"
 mqttPort                 =  8883  # Secure port
-
 
 gpsPort               = findPort("GPS/GNSS Receiver")
 
@@ -125,12 +124,10 @@ if __name__ == "__main__":
     print("MQTT On                    : {0}".format(mqttOn))
     print("MQTT Credentials File      : {0}".format(mqttCredentialsFile))
     print("MQTT Broker and Port       : {0}, {1}".format(mqttOn,mqttPort))
-   #-------------------------------------------#
+    #-------------------------------------------#
     print("Ozone Ports :")
     for dev in ozonePort:
         print("\t{0}".format(dev))
-    
-    
     #-------------------------------------------#
     print("IPS Ports :")
     for dev in ipsPorts:
