@@ -18,11 +18,14 @@ baudRate  = 9600
 
 
 def gpsToggle():
-    
-    with open(statusJsonFile, 'r') as f:
-        data = json.load(f)
-    print(data)
-
+    try:    
+        with open(statusJsonFile, 'r') as f:
+            data = json.load(f)
+        print(data)
+    except Exception as e:
+            
+        print(e)
+        print()
 
 
 
