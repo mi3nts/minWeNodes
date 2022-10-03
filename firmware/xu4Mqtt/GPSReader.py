@@ -22,12 +22,12 @@ def gpsToggle():
     with open(statusJsonFile, 'r') as f:
         data = json.load(f)
     print(data)
-    
+
 
 
 
 def main():
-
+    gpsToggle()
     reader = pynmea2.NMEAStreamReader()
     ser = serial.Serial(
     port= gpsPort,\
