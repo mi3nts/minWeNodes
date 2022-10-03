@@ -46,16 +46,18 @@ def main():
                     if (dataString.startswith("$GPGGA") and mSR.getDeltaTime(lastGPGGA,delta)):
                         lastGPGGA = time.time()
                         mSR.GPSGPGGA2Write(dataString,dateTime)
+                        
                     if (dataString.startswith("$GPRMC") and mSR.getDeltaTime(lastGPRMC,delta)):
                         lastGPRMC = time.time()
                         mSR.GPSGPRMC2Write(dataString,dateTime)
                        
                     line = []
                     break
-        except:
-            print("Incomplete String Read")
-            line = []
-
+        except Exception as e:
+            
+            print(e)
+            print()
+            
     ser.close()
 
 

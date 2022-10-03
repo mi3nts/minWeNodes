@@ -896,9 +896,9 @@ def GPSGPGGAWrite(dataString,dateTime):
 def GPSGPGGA2Write(dataString,dateTime):
     dataStringPost = dataString.replace('\n', '')
     sensorData = pynmea2.parse(dataStringPost)
-    latitudeCordinate = getLatitudeCords(sensorData.lat,sensorData.lat_dir)
-
+    print(dataStringPost)    
     if(sensorData.gps_qual>0):
+        latitudeCordinate = getLatitudeCords(sensorData.lat,sensorData.lat_dir)
         sensorName = "GPSGPGGA2"
         sensorDictionary = OrderedDict([
                 ("dateTime"          ,str(dateTime)),
@@ -951,6 +951,7 @@ def GPSGPRMC2Write(dataString,dateTime):
 
     dataStringPost = dataString.replace('\n', '')
     sensorData = pynmea2.parse(dataStringPost)
+    print(dataStringPost)
     if(sensorData.status=='A'):
         sensorName = "GPSGPRMC2"
         sensorDictionary = OrderedDict([
