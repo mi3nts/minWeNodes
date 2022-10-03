@@ -55,7 +55,7 @@ def main():
         try:
             for c in ser.read():
                 line.append(chr(c))
-                if chr(c) == '\n':
+                if chr(c) == '\n' and gpsToggle():
                     dataString     = (''.join(line))
                     dateTime  = datetime.datetime.now()
 
