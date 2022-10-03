@@ -1,7 +1,8 @@
-
+import datetime
 import odroid_wiringpi as wpi
 import time
-
+from collections import OrderedDict
+from mintsXU4 import mintsSensorReader as mSR
 wpi.wiringPiSetup()
 
 debug  = False 
@@ -9,20 +10,24 @@ debug  = False
 def main():
     while True:
         try:
-            batteryLevelRaw = wpi.analogRead(25)
+            dateTime          = datetime.datetime.now()
+            batteryLevelRaw   = wpi.analogRead(25)
+            referenceLevelRaw = wpi.analogRead(29)
             time.sleep(30)
-        
-            batteryLevel    = batteryLevelRaw*(2.1*2)/(4095)
-            batteryLevelPer = batteryLevel*(100/4.2)
-            referenceLev    = wpi.analogRead(29)
-            print("======= Battery Readings =======")
-            print("Reference Level:          " + str(referenceLev))
-            print("---------------------------------")
-            print("Battery Level Raw:        " + str(batteryLevelRaw))
-            print("---------------------------------")
-            print("Battery Level:            " + str(batteryLevel)+" V")
-            print("---------------------------------")
-            print("Battery Level Percentage: " + str(batteryLevelPer)+" %")    
+
+            batteryLevel          = batteryLevelRaw*(2.1*2)/(4095)
+            batteryLevelPercetage = batteryLevel*(100/4.2)
+    
+            sensorDictionary =  OrderedDict([
+                    ("dateTime"               ,str(dateTime)), # always the same
+                    ("batteryLevelRaw"        ,str(batteryLevelRaw)), # check with arduino code
+                    ("batteryLevel"           ,str(batteryLevel)),
+                    ("batteryLevelPercetage"  ,str(batteryLevelPercetage)),
+                    ("referenceLevelRaw"      ,str(referenceLevelRaw))
+                    ])
+
+            mSR.sensorFinisher(dateTime,"MWBL001",sensorDictionary)
+
 
         except Exception as e:
             print(e)
@@ -34,4 +39,4 @@ if __name__ == "__main__":
     print("    MINTS    ")
     print("=============")
     print("Monitoring Battery level for Mints Wearable Node")
-    
+    main()
