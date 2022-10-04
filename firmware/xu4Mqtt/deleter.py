@@ -6,7 +6,7 @@ from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
 
 dataFolder    = mD.dataFolder
-dataFolderRef    = mD.dataFolderReference
+dataFolderRef = mD.dataFolderReference
 macAddress    = mD.macAddress
 
 
