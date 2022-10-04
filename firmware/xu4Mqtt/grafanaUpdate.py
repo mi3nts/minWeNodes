@@ -53,20 +53,16 @@ def syncHostData(hostFound,hostID,hostIP):
         mSR.directoryCheck(dataFolder+"/"+hostID+"/")
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
-        print()
         csvDataFiles = glob.glob(hostsDataFolder+"/"+hostID+ "/*/*/*/*.csv")
-        print(csvDataFiles)
         for csvFile in csvDataFiles:
             print()
             with open(csvFile, "r") as f:
                 sensorID = csvFile.split("_")[-4]
-                # sensorID = sensorIDPre.replace("\n","").replace("\r","").replace("\t","")
                 reader = csv.DictReader(f)
                 rowList = list(reader)
                 for rowData in rowList:
-                    print("Publishing MQTT Data for sensorID:"+sensorID+"--")
-                    print(sensorID)
-                    # mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                    print("Publishing MQTT Data for sensorID:"+sensorID)
+                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
 
 
 
