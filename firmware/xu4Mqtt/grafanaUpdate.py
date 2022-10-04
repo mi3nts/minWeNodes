@@ -54,8 +54,6 @@ def syncHostData(hostFound,hostID,hostIP):
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
         print()
-        # Add This Point I should update the via MQTT 
-        hostsDataFolder
         csvDataFiles = glob.glob(hostsDataFolder+"/"+hostID+ "/*/*/*/*.csv")
         print(csvDataFiles)
         for csvFile in csvDataFiles:
@@ -66,7 +64,7 @@ def syncHostData(hostFound,hostID,hostIP):
                 rowList = list(reader)
                 for rowData in rowList:
                     print("------------------------")
-                    print(rowData)
+                    # print(rowData)
                     mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
 
 
