@@ -40,7 +40,7 @@ def getHostMac():
             hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","")
             print(hostID)
             print(hostIn['nodeID'])
-            print(str(hostIn['nodeID'])== str(hostID))
+            print(hostIn['nodeID']== str(hostID))
             if hostID == hostIn['nodeID']:
                 print("Host " + hostID + " found @" + ipAddress) 
                 return True, hostID;
