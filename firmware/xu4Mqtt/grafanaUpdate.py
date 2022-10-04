@@ -80,9 +80,8 @@ def syncHostData(hostFound,hostID,hostIP):
 
 def gpsToggle(hostFound,hostID,hostIP):
     if hostFound:
-        mSR.directoryCheck(dataFolder+"/"+hostID+"/")
-        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
-        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
+        mSR.directoryCheck(hostsStatusFolder)
+        print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+hostsStatusFolder+"/ " +dataFolder+"/"+hostID)
  
 
 
@@ -91,7 +90,7 @@ def gpsToggle(hostFound,hostID,hostIP):
 def main():
     hostFound,hostID,hostIP = getHostMac()
     syncHostData(hostFound,hostID,hostIP)
-
+    gpsToggle(hostFound,hostID,hostIP)
     # print("Main")
     # lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
     # print(lk[10])
