@@ -18,11 +18,11 @@ import os
 import nmap, socket
 import yaml
 
-dataFolder     = mD.dataFolder
-gpsPort        = mD.gpsPort
-statusJsonFile = mD.statusJsonFile
-hostsFile      = mD.hostsFile
-
+dataFolder      = mD.dataFolder
+gpsPort         = mD.gpsPort
+statusJsonFile  = mD.statusJsonFile
+hostsFile       = mD.hostsFile
+hostsDataFolder = mD.hostsDataFolder
 
 hosts       = yaml.load(open(hostsFile))
 
@@ -46,9 +46,22 @@ def getHostMac():
     return False, -1;
      
 
+def syncHostData(hostFound,hostID):
+    if hostFound:
+        # Create Folder 
+        mSR.directoryCheck(hostsDataFolder+hostID)
+        print()
+
+
+
+
+
+
 
 def main():
     hostFound,hostID = getHostMac()
+    syncHostData(hostFound,hostID)
+
     # print("Main")
     # lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
     # print(lk[10])
