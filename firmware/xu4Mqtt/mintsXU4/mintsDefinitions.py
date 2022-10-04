@@ -102,10 +102,11 @@ latestDisplayOn       = False
 latestOn              = False
 airmarPort            = findAirmarPort()
 # For MQTT 
-mqttOn                    = False
-mqttCredentialsFile      = 'mintsXU4/credentials.yml'
-mqttBroker               = "mqtt.circ.utdallas.edu"
-mqttPort                 =  8883  # Secure port
+mqttOn                = False
+mqttCredentialsFile   = 'mintsXU4/credentials.yml'
+hostsFile             = 'mintsXU4/hosts.yml'
+mqttBroker            = "mqtt.circ.utdallas.edu"
+mqttPort              =  8883  # Secure port
 
 gpsPort               = findPort("GPS/GNSS Receiver")
 
