@@ -51,8 +51,8 @@ def syncHostData(hostFound,hostID,hostIP):
         # Creating Folder 
         mSR.directoryCheck(hostsDataFolder+"/"+hostID+"/")
         mSR.directoryCheck(dataFolder+"/"+hostID+"/")
-        print('rsync -avzrtu -e "ssh -p 2222" teamlary@' +hostIP+":raw/"+hostID +"/" +hostsDataFolder+"/"+hostID)
-        print('rsync -avzrtu -e "ssh -p 2222" teamlary@' +hostIP+":raw/"+hostID +"/" +dataFolder+"/"+hostID)
+        print('rsync -avzrtu -e "ssh -p 2222" teamlary@' +hostIP+":raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
+        print('rsync -avzrtu -e "ssh -p 2222" teamlary@' +hostIP+":raw/"+hostID +"/ " +dataFolder+"/"+hostID)
         print()
 
 
