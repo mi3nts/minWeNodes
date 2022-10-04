@@ -48,15 +48,14 @@ class BME280:
         if measurement is not None:
             print("Temperature: {:.2f}'C, Pressure: {:.2f}'C, Relative Humidity: {:.2f}%".format(measurement.temperature,measurement.pressure,measurement.humidity))
             dateTime = datetime.datetime.now() 
-            A = measurement.pressure / 101325;
+            A = (100*measurement.pressure) / 101325;
             B = 1 / 5.25588
             C = pow(A, B)
             C = 1.0 - C
             altitude = C / 0.0000225577
             time.sleep(1)
-            return [dateTime,measurement.temperature,measurement.pressure,measurement.humidity,altitude];
+            return [dateTime,measurement.temperature,100*measurement.pressure,measurement.humidity,altitude];
         else:
             time.sleep(1)
             return [];
             print("BME280 Measurments not read")    
-
