@@ -63,8 +63,8 @@ def syncHostData(hostFound,hostID,hostIP):
                 reader = csv.DictReader(f)
                 rowList = list(reader)
                 for rowData in rowList:
-                    print("Publishing MQTT Data...")
-                    print(rowData)
+                    print("Publishing MQTT Data for sensorID: ", sensorID)
+                    # print(rowData)
                     mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
 
 
