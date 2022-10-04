@@ -60,7 +60,7 @@ def syncHostData(hostFound,hostID,hostIP):
             print()
             with open(csvFile, "r") as f:
                 sensorIDPre = csvFile.split("_")[-4]
-                sensorID = sensorIDPre.replace("\n","").replace("\r","").replace(" ","")
+                sensorID = sensorIDPre.replace("\n","").replace("\r","").replace("\t","")
                 reader = csv.DictReader(f)
                 rowList = list(reader)
                 for rowData in rowList:
