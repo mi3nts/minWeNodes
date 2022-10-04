@@ -34,7 +34,6 @@ def getHostMac():
         host = socket.gethostbyname(ipAddress)
         scanner.scan(host, '1', '-v')
         ipState = scanner[host].state()
-        print("IP Status: ", scanner[host].state())
         if ipState == "up":
             hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","").replace("\n","")
             if hostID == hostIn['nodeID']:
@@ -43,7 +42,7 @@ def getHostMac():
             else:
                 print("Host " + hostID + " found with incorrect IP:" + ipAddress)
                 return False, 0;
-    print("No Host found")                
+    print("No hosts found")                
     return False, -1;
      
 
