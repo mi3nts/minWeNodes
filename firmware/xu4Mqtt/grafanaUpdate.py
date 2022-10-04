@@ -18,11 +18,17 @@ import os
 import nmap, socket
 import yaml
 
-dataFolder      = mD.dataFolder
-gpsPort         = mD.gpsPort
-statusJsonFile  = mD.statusJsonFile
-hostsFile       = mD.hostsFile
-hostsDataFolder = mD.hostsDataFolder
+dataFolder          = mD.dataFolder
+gpsPort             = mD.gpsPort
+statusJsonFile      = mD.statusJsonFile
+hostsFile           = mD.hostsFile
+hostsDataFolder     = mD.hostsDataFolder
+statusJsonFile      = mD.statusJsonFile
+statusFiles         = mD.statusFiles
+hostsStatusFolder   = mD.hostsStatusFolder
+
+
+
 
 hosts       = yaml.load(open(hostsFile))
 
@@ -45,10 +51,8 @@ def getHostMac():
     print("No hosts found")                
     return False, -1,0;
      
-
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
-        # Creating Folder 
         mSR.directoryCheck(hostsDataFolder+"/"+hostID+"/")
         mSR.directoryCheck(dataFolder+"/"+hostID+"/")
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
@@ -56,19 +60,30 @@ def syncHostData(hostFound,hostID,hostIP):
         csvDataFiles = glob.glob(hostsDataFolder+"/"+hostID+ "/*/*/*/*.csv")
         for csvFile in csvDataFiles:
             print()
-            with open(csvFile, "r") as f:
-                sensorID = csvFile.split("_")[-4]
-                reader = csv.DictReader(f)
-                rowList = list(reader)
-                for rowData in rowList:
-                    print("Publishing MQTT Data for sensorID:"+sensorID)
-                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
-                    time.sleep(0.001)
+            try:
+                with open(csvFile, "r") as f:
+                    sensorID = csvFile.split("_")[-4]
+                    reader = csv.DictReader(f)
+                    rowList = list(reader)
+                    for rowData in rowList:
+                        try:
+                            print("Publishing MQTT Data for sensorID:"+sensorID)
+                            mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                            time.sleep(0.001)
+                        except Exception as e:
+                            print(e)
+                            print("Data row not published")
+            except Exception as e:
+                print(e)
+                print("Data file not published")
+                print(csvFile)
 
-
-
-
-
+def gpsToggle(hostFound,hostID,hostIP):
+    if hostFound:
+        mSR.directoryCheck(dataFolder+"/"+hostID+"/")
+        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
+        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
+ 
 
 
 
