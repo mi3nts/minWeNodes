@@ -37,7 +37,7 @@ def getHostMac():
         print("IP Status: ", scanner[host].state())
         if ipState == "up":
             print("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"')
-            hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","")
+            hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","").replace(" ","")
             print(hostID)
             print(hostIn['nodeID'])
             print(hostIn['nodeID']== str(hostID))
