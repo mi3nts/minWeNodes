@@ -39,12 +39,19 @@ def getHostMac():
             print("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"')
             hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","")
             print(hostID)
-
-
+            if hostID == hostIn['nodeID']:
+                print("Host " + hostID + " found @" + ipAddress) 
+                return True, hostID;
+            else:
+                print("Host " + hostID + " found with incorrect IP:" + ipAddress)
+                return False, 0;
+    print("No Host found")                
+    return False, -1;
+     
 
 
 def main():
-    getHostMac()
+    hostFound,hostID = getHostMac()
     # print("Main")
     # lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
     # print(lk[10])
