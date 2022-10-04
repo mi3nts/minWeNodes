@@ -62,7 +62,7 @@ def syncHostData(hostFound,hostID,hostIP):
             print()
             with open(csvFile, "r") as f:
                 print(csvFile)
-                print(csvFile.split("-"))
+                print(csvFile.split("_"))
                 
                 reader = csv.DictReader(f)
                 rowList = list(reader)
