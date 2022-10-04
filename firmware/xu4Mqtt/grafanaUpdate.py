@@ -38,19 +38,22 @@ def getHostMac():
             hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","").replace("\n","")
             if hostID == hostIn['nodeID']:
                 print("Host " + hostID + " found @" + ipAddress) 
-                return True, hostID;
+                return True, hostID,hostIn['IP'];
             else:
                 print("Host " + hostID + " found with incorrect IP:" + ipAddress)
-                return False, 0;
+                return False, 0,0;
     print("No hosts found")                
-    return False, -1;
+    return False, -1,0;
      
 
-def syncHostData(hostFound,hostID):
+def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
-        # Create Folder 
+        # Creating Folder 
         mSR.directoryCheck(hostsDataFolder+"/"+hostID+"/")
         mSR.directoryCheck(dataFolder+"/"+hostID+"/")
+        os.system('rsync -avzrtu -e "ssh -p 2222" teamlary@' +hos )
+
+
         print()
 
 
@@ -60,8 +63,8 @@ def syncHostData(hostFound,hostID):
 
 
 def main():
-    hostFound,hostID = getHostMac()
-    syncHostData(hostFound,hostID)
+    hostFound,hostID,hostIP = getHostMac()
+    syncHostData(hostFound,hostID,hostIP)
 
     # print("Main")
     # lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
