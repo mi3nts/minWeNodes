@@ -65,7 +65,7 @@ def syncHostData(hostFound,hostID,hostIP):
                 rowList = list(reader)
                 for rowData in rowList:
                     print("Publishing MQTT Data for sensorID:", sensorID.replace(" ",""))
-                    # print(rowData)
+                    print(sensorID)
                     # mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
 
 
