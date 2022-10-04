@@ -1076,6 +1076,7 @@ def directoryCheck(outputPath):
     exists = os.path.isfile(outputPath)
     directoryIn = os.path.dirname(outputPath)
     if not os.path.exists(directoryIn):
+        print("Creating Folder @:" + directoryIn)
         os.makedirs(directoryIn)
     return exists
 
