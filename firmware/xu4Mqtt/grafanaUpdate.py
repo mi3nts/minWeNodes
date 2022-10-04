@@ -41,19 +41,20 @@ def getHostMac():
 
 
 def main():
-    print("Main")
-    lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
-    print(lk[10])
-    with open(lk[10], "r") as f:
-        reader = csv.DictReader(f)
-        a = list(reader)
-        # print(reader)
-        # print(a)
+    getHostMac()
+    # print("Main")
+    # lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
+    # print(lk[10])
+    # with open(lk[10], "r") as f:
+    #     reader = csv.DictReader(f)
+    #     a = list(reader)
+    #     # print(reader)
+    #     # print(a)
 
-    for lk2 in a:
-        print("------------------------")
-        print(lk2)
-        mL.writeMQTTLatestWearable(lk2,"OPCN3","nodeIDWearable")  
+    # for lk2 in a:
+    #     print("------------------------")
+    #     print(lk2)
+    #     mL.writeMQTTLatestWearable(lk2,"OPCN3","nodeIDWearable")  
 
 
 if __name__ == "__main__":
