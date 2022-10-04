@@ -81,7 +81,7 @@ def syncHostData(hostFound,hostID,hostIP):
 def gpsToggle(hostFound,hostID,hostIP):
     if hostFound:
         mSR.directoryCheck(hostsStatusFolder)
-        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" " +dataFolder+"/"+hostsStatusFolder)
+        print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusFolder)
  
 
 
