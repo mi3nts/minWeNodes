@@ -59,13 +59,17 @@ def syncHostData(hostFound,hostID,hostIP):
         csvDataFiles = glob.glob(hostsDataFolder+"/"+hostID+ "/*/*/*/*.csv")
         print(csvDataFiles)
         for csvFile in csvDataFiles:
+            print()
             with open(csvFile, "r") as f:
+                print(csvFile)
+                print(csvFile.split("/"))
+                
                 reader = csv.DictReader(f)
                 rowList = list(reader)
-                for rowData in rowList:
-                    print("------------------------")
-                    print(rowData)
-                #     mL.writeMQTTLatestWearable(lk2,"OPCN3","nodeIDWearable")  
+                #for rowData in rowList:
+                #    print("------------------------")
+                    # print(rowData)
+                    # mL.writeMQTTLatestWearable(lk2,"OPCN3",hostID)  
 
 
 
