@@ -50,6 +50,7 @@ def syncHostData(hostFound,hostID):
     if hostFound:
         # Create Folder 
         mSR.directoryCheck(hostsDataFolder+"/"+hostID+"/")
+        mSR.directoryCheck(dataFolder+"/"+hostID+"/")
         print()
 
 
