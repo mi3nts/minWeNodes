@@ -61,15 +61,13 @@ def syncHostData(hostFound,hostID,hostIP):
         for csvFile in csvDataFiles:
             print()
             with open(csvFile, "r") as f:
-                print(csvFile)
-                print(csvFile.split("_")[-4])
-                
+                sensorID = csvFile.split("_")[-4]
                 reader = csv.DictReader(f)
                 rowList = list(reader)
-                #for rowData in rowList:
-                #    print("------------------------")
-                    # print(rowData)
-                    # mL.writeMQTTLatestWearable(lk2,"OPCN3",hostID)  
+                for rowData in rowList:
+                    print("------------------------")
+                    print(rowData)
+                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
 
 
 
