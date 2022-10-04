@@ -63,7 +63,7 @@ def syncHostData(hostFound,hostID,hostIP):
                 for rowData in rowList:
                     print("Publishing MQTT Data for sensorID:"+sensorID)
                     mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
-                    time.sleep(0.01)
+                    time.sleep(0.001)
 
 
 
