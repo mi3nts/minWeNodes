@@ -54,6 +54,7 @@ def syncHostData(hostFound,hostID,hostIP):
         print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
         print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
+        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
         print()
 
 
