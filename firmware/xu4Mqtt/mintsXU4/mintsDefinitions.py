@@ -91,8 +91,8 @@ dataFolder                = "/home/teamlary/mintsData/raw"
 hostsDataFolder           = "/home/teamlary/mintsDataHosts/raw"
 dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
 statusJsonFile            = "/home/teamlary/status/status.json"
-hostsStatusFolder         = "/home/teamlary/hostStatus/"
-statusFiles               = "/home/teamlary/statusFiles/"
+hostsStatusFolder         = "/home/teamlary/hostStatus"
+statusFiles               = "/home/teamlary/statusFiles"
 
 
 duePort               = findDuePort()
