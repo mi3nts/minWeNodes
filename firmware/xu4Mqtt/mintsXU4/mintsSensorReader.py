@@ -359,8 +359,9 @@ def AS3935Write(sensorData,dateTime):
 def IPS7100Write(sensorData,dateTime):
     dataOut    = sensorData.split(',')
     sensorName = "IPS7100"
-    dataLength = 30
-    if(len(dataOut) == (dataLength)):
+    dataLength1 = 29
+    dataLength2 = 30
+    if(len(dataOut) == (dataLength1) or len(dataOut) == (dataLength2)):
         sensorDictionary =  OrderedDict([
                 ("dateTime" , str(dateTime)), # always the same
         		("pc0_1"  ,dataOut[1]), 
