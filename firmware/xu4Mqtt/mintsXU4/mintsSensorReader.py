@@ -1082,14 +1082,21 @@ def directoryCheck(outputPath):
 
 def directoryCheck2(outputPath):
     isFile = os.path.isfile(outputPath)
-    print(isFile)
-    directoryIn = os.path.dirname(outputPath)
-    print(directoryIn)
+    if isFile:
+        return True
+    if outputPath.find > 0:
+        directoryIn = os.path.dirname(outputPath)
+    else: 
+        directoryIn = os.path.dirname(outputPath+"/")
 
     if not os.path.exists(directoryIn):
         print("Creating Folder @:" + directoryIn)
         os.makedirs(directoryIn)
-    return exists
+        return False
+    return True;
+
+
+    
 
 
 
