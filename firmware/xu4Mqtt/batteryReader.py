@@ -13,9 +13,11 @@ def main():
             dateTime          = datetime.datetime.now()
             batteryLevelRaw   = wpi.analogRead(25)
             referenceLevelRaw = wpi.analogRead(29)
-            batteryLevel          = batteryLevelRaw*(2.1*2)/(4095)
-            batteryLevelPercetage = batteryLevel*(100/4.2)
-    
+            batteryLevel      = batteryLevelRaw*(2.1*2)/(4095)
+            #batteryLevelPercetage = batteryLevel*(100/4.2)
+            batteryLevelPercetage = (batteryLevel-2.5)*(100)/(3.2-2.5)
+
+
             sensorDictionary =  OrderedDict([
                     ("dateTime"               ,str(dateTime)), # always the same
                     ("batteryLevelRaw"        ,str(batteryLevelRaw)), # check with arduino code

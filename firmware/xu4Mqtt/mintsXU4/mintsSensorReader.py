@@ -1073,14 +1073,25 @@ def writeCSV(reader,keys,outputPath):
     csvWriter(outputPath,reader,keys)
 
 def directoryCheck(outputPath):
-    print(outputPath)
     exists = os.path.isfile(outputPath)
-    print(exists)
     directoryIn = os.path.dirname(outputPath)
     if not os.path.exists(directoryIn):
         print("Creating Folder @:" + directoryIn)
         os.makedirs(directoryIn)
     return exists
+
+def directoryCheck2(outputPath):
+    isFile = os.path.isfile(outputPath)
+    print(isFile)
+    directoryIn = os.path.dirname(outputPath)
+    print(directoryIn)
+
+    if not os.path.exists(directoryIn):
+        print("Creating Folder @:" + directoryIn)
+        os.makedirs(directoryIn)
+    return exists
+
+
 
 def csvWriter(writePath,organizedData,keys):
     with open(writePath,'w') as output_file:
