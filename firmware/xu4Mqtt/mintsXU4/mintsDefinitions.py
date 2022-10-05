@@ -134,6 +134,8 @@ if __name__ == "__main__":
     print("MQTT On                    : {0}".format(mqttOn))
     print("MQTT Credentials File      : {0}".format(mqttCredentialsFile))
     print("MQTT Broker and Port       : {0}, {1}".format(mqttOn,mqttPort))
+
+    
     #-------------------------------------------#
     print("Ozone Ports :")
     for dev in ozonePort:

@@ -1,4 +1,5 @@
 # Import tkinter and webview libraries
+from fileinput import filename
 from tkinter import *
 import webview
 import glob
@@ -17,7 +18,7 @@ import csv
 import os 
 import nmap, socket
 import yaml
-
+import json
 
 dataFolder          = mD.dataFolder
 gpsPort             = mD.gpsPort
@@ -33,11 +34,9 @@ gpsOffJsonFile      = mD.gpsOffJsonFile
 hosts     = yaml.load(open(hostsFile),Loader=yaml.FullLoader)
 locations = yaml.load(open(locationsFile),Loader=yaml.FullLoader)
 
-
-print(locations)
-
-repos     = locations['locations']['repos']
-rawFolder = locations['locations']['rawFolder']
+repos        = locations['locations']['repos']
+rawFolder    = locations['locations']['rawFolder']
+latestFolder = locations['locations']['latestFolder']
 
 def getHostMac():
     scanner = nmap.PortScanner()
@@ -57,35 +56,54 @@ def getHostMac():
                 return False, 0,0;
     print("No hosts found")                
     return False, -1,0;
-     
+
+def readLatestTime(hostID,sensorID):
+    fileName = latestFolder + "/" + hostID+"_"+sensorID+".json"
+    if os.path.isfile(fileName):
+        try:    
+            with open(filename, 'r') as f:
+                data = json.load(f)
+            return datetime.datetime.strptime(data['dateTime'])
+
+        except Exception as e:
+            print(e)
+    else:
+        return datetime.datetime.strptime("2016-01-01")
+   
+
+
+
+
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
-        mSR.directoryCheck2(hostsDataFolder+"/"+hostID+"/")
+        # mSR.directoryCheck2(hostsDataFolder+"/"+hostID+"/")
         mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
-        os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + hostsDataFolder + "/"+hostID)
+        # os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + hostsDataFolder + "/"+hostID)
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
-        csvDataFiles = glob.glob(hostsDataFolder+"/"+hostID+ "/*/*/*/*.csv")
+        csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
+        readLatestTime(hostID,"BME280")
         
-        for csvFile in csvDataFiles:
-            print()
-            try:
-                with open(csvFile, "r") as f:
-                    sensorID = csvFile.split("_")[-4]
-                    reader = csv.DictReader(f)
-                    rowList = list(reader)
-                    for rowData in rowList:
-                        try:
-                            print("Publishing MQTT Data for sensorID:"+sensorID)
-                            mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
-                            time.sleep(0.001)
-                        except Exception as e:
-                            print(e)
-                            print("Data row not published")
-            except Exception as e:
-                print(e)
-                print("Data file not published")
-                print(csvFile)
+        # for csvFile in csvDataFiles:
+        #     try:
+        #         with open(csvFile, "r") as f:
+        #             sensorID       = csvFile.split("_")[-4]
+        #             # latestDateTime = 
+                    
+        #             reader = csv.DictReader(f)
+        #             rowList = list(reader)
+        #             for rowData in rowList:
+        #                 try:
+        #                     print("Publishing MQTT Data for sensorID:"+sensorID)
+        #                     mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+        #                     time.sleep(0.001)
+        #                 except Exception as e:
+        #                     print(e)
+        #                     print("Data row not published")
+        #     except Exception as e:
+        #         print(e)
+        #         print("Data file not published")
+        #         print(csvFile)
 
 def gpsToggle(hostFound,hostID,hostIP):
     if hostFound:
