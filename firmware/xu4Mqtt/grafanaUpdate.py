@@ -82,28 +82,29 @@ def syncHostData(hostFound,hostID,hostIP):
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
-        readLatestTime(hostID,"BME280")
-        
-        # for csvFile in csvDataFiles:
-        #     try:
-        #         with open(csvFile, "r") as f:
-        #             sensorID       = csvFile.split("_")[-4]
-        #             # latestDateTime = 
+        # readLatestTime(hostID,"BME280")
+
+        for csvFile in csvDataFiles:
+            try:
+                with open(csvFile, "r") as f:
+                    sensorID       = csvFile.split("_")[-4]
+                    # latestDateTime = 
                     
-        #             reader = csv.DictReader(f)
-        #             rowList = list(reader)
-        #             for rowData in rowList:
-        #                 try:
-        #                     print("Publishing MQTT Data for sensorID:"+sensorID)
-        #                     mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
-        #                     time.sleep(0.001)
-        #                 except Exception as e:
-        #                     print(e)
-        #                     print("Data row not published")
-        #     except Exception as e:
-        #         print(e)
-        #         print("Data file not published")
-        #         print(csvFile)
+                    reader = csv.DictReader(f)
+                    rowList = list(reader)
+                    print(rowList[0])
+                    # for rowData in rowList:
+                    #     try:
+                    #         print("Publishing MQTT Data for sensorID:"+sensorID)
+                    #         mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                    #         time.sleep(0.001)
+                    #     except Exception as e:
+                    #         print(e)
+                    #         print("Data row not published")
+            except Exception as e:
+                print(e)
+                print("Data file not published")
+                print(csvFile)
 
 def gpsToggle(hostFound,hostID,hostIP):
     if hostFound:
