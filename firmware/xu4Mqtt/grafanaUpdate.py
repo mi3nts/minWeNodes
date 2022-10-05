@@ -82,7 +82,8 @@ def syncHostData(hostFound,hostID,hostIP):
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
-        readLatestTime(hostID,"BME280")
+        dateTime = readLatestTime(hostID,"BME280")
+        print(dateTime)
 
         for csvFile in csvDataFiles:
             try:
