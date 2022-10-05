@@ -99,7 +99,7 @@ def gpsToggle(hostFound,hostIP):
 
 def main():
     hostFound,hostID,hostIP = getHostMac()
-    gpsToggle(hostFound,hostID,hostIP)
+    gpsToggle(hostFound,hostIP)
 
 
 if __name__ == "__main__":
