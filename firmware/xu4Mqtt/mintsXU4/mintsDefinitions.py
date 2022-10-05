@@ -91,7 +91,7 @@ dataFolder                = "/home/teamlary/mintsData/raw"
 hostsDataFolder           = "/home/teamlary/mintsDataHosts/raw"
 dataFolderMQTT            = "/home/teamlary/mintsData/rawMQTT"
 statusJsonFile            = "/home/teamlary/status/status.json"
-hostsStatusFolder         = "/home/teamlary/hostStatus"
+hostsStatusJsonFile       = "/home/teamlary/hostStatus/status.json"
 statusFiles               = "/home/teamlary/statusFiles"
 
 

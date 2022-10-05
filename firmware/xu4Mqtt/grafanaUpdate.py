@@ -25,7 +25,7 @@ hostsFile           = mD.hostsFile
 hostsDataFolder     = mD.hostsDataFolder
 statusJsonFile      = mD.statusJsonFile
 statusFiles         = mD.statusFiles
-hostsStatusFolder   = mD.hostsStatusFolder
+hostsStatusJsonFile = mD.hostsStatusJsonFile
 
 
 
@@ -80,8 +80,8 @@ def syncHostData(hostFound,hostID,hostIP):
 
 def gpsToggle(hostFound,hostID,hostIP):
     if hostFound:
-        mSR.directoryCheck2(hostsStatusFolder)
-        # print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusFolder+"/")
+        mSR.directoryCheck2(hostsStatusJsonFile)
+        print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile)
         # os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusFolder+"/")
 
 
