@@ -111,7 +111,8 @@ def gpsToggle(hostFound,hostIP):
             out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
             # print(out)
    
-
+        out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
+        print("Current GPS Status", mSR.gpsStatus(hostsStatusJsonFile))
 
 
 
