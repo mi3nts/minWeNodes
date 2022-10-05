@@ -60,8 +60,8 @@ def getHostMac():
      
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
-        mSR.directoryCheck(hostsDataFolder+"/"+hostID+"/")
-        mSR.directoryCheck(dataFolder+"/"+hostID+"/")
+        mSR.directoryCheck2(hostsDataFolder+"/"+hostID+"/")
+        mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + hostsDataFolder + "/"+hostID)
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
