@@ -92,6 +92,7 @@ def gpsToggle(hostFound,hostIP):
             time.sleep(0.1)
             os.system('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
             time.sleep(0.1)
+            print("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsReRun.sh"').read()
             out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsReRun.sh"').read()
             print(out)
             time.sleep(0.1)
