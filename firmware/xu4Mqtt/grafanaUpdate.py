@@ -61,6 +61,7 @@ def getHostMac():
 def readLatestTime(hostID,sensorID):
     
     fileName = latestFolder + "/" + hostID+"_"+sensorID+".json"
+    print("====")
     print(fileName)
     if os.path.isfile(fileName):
         try:    
