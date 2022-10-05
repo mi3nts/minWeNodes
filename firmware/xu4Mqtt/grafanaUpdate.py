@@ -95,7 +95,7 @@ def gpsToggle(hostFound,hostIP):
             os.system('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
             
             time.sleep(0.1)
-            os.system("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsReRun.sh"')
+            os.system("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"')
             
         else:
    
@@ -107,7 +107,7 @@ def gpsToggle(hostFound,hostIP):
             os.system('scp ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
             time.sleep(0.1)
             print("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsReRun.sh"')
-            os.system("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsReRun.sh"')
+            os.system("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"')
             
    
 
