@@ -64,7 +64,7 @@ def readLatestTime(hostID,sensorID):
         try:    
             with open(filename, 'r') as f:
                 data = json.load(f)
-            return datetime.datetime.strptime(data['dateTime'])
+            return datetime.datetime.strptime(data['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
 
         except Exception as e:
             print(e)
