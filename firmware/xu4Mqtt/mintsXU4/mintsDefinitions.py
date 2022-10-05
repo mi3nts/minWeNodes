@@ -107,8 +107,11 @@ latestOn              = False
 airmarPort            = findAirmarPort()
 # For MQTT 
 mqttOn                = False
+
 mqttCredentialsFile   = 'mintsXU4/credentials.yml'
 hostsFile             = 'mintsXU4/hosts.yml'
+locationsFile         = 'mintsXU4/locations.yml'
+
 mqttBroker            = "mqtt.circ.utdallas.edu"
 mqttPort              =  8883  # Secure port
 

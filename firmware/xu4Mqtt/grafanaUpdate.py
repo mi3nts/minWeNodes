@@ -23,6 +23,7 @@ dataFolder          = mD.dataFolder
 gpsPort             = mD.gpsPort
 statusJsonFile      = mD.statusJsonFile
 hostsFile           = mD.hostsFile
+locationsFile           = mD.locationsFile
 hostsDataFolder     = mD.hostsDataFolder
 statusJsonFile      = mD.statusJsonFile
 hostsStatusJsonFile = mD.hostsStatusJsonFile
@@ -32,7 +33,12 @@ gpsOffJsonFile      = mD.gpsOffJsonFile
 
 
 
-hosts       = yaml.load(open(hostsFile),Loader=yaml.FullLoader)
+hosts     = yaml.load(open(hostsFile),Loader=yaml.FullLoader)
+locations = yaml.load(open(locationsFile),Loader=yaml.FullLoader)
+
+repos     = locations['repos']
+rawFolder = locations['rawFolder']
+
 
 def getHostMac():
     scanner = nmap.PortScanner()
@@ -57,9 +63,11 @@ def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
         mSR.directoryCheck(hostsDataFolder+"/"+hostID+"/")
         mSR.directoryCheck(dataFolder+"/"+hostID+"/")
-        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +hostsDataFolder+"/"+hostID)
-        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":mintsData/raw/"+hostID +"/ " +dataFolder+"/"+hostID)
+        os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + hostsDataFolder + "/"+hostID)
+        os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
+
         csvDataFiles = glob.glob(hostsDataFolder+"/"+hostID+ "/*/*/*/*.csv")
+        
         for csvFile in csvDataFiles:
             print()
             try:
@@ -88,7 +96,7 @@ def gpsToggle(hostFound,hostIP):
 
         if mSR.gpsStatus(hostsStatusJsonFile):
             print("GPS Currently Active, Turning GPS Off")
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
+            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
             # print(out)
 
             time.sleep(0.1)
@@ -96,12 +104,12 @@ def gpsToggle(hostFound,hostIP):
             #print()
             time.sleep(0.1)
           
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
+            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
             # print(out)
         else:
    
             print("GPS Currently Inactive, Turning GPS On")
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
+            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
             # print(out)
    
             time.sleep(0.1)
@@ -109,11 +117,14 @@ def gpsToggle(hostFound,hostIP):
             #print(out)
             time.sleep(0.1)
             
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
+            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
             # print(out)
    
         out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
         print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
+    else:
+        print("No Host Found")
+        
 
 
 

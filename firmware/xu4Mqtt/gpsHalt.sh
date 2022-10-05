@@ -2,5 +2,5 @@
 #
 
 sleep 1
-kill $(pgrep -f 'GPSReader.py')
+kill $(pgrep -f 'GPSReader.py') &
 sleep 1
