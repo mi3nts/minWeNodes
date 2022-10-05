@@ -93,7 +93,8 @@ def syncHostData(hostFound,hostID,hostIP):
                     
                     reader = csv.DictReader(f)
                     rowList = list(reader)
-                    print(rowList[0])
+                    print(rowList[-1])
+                    print(rowList[-2])
                     # for rowData in rowList:
                     #     try:
                     #         print("Publishing MQTT Data for sensorID:"+sensorID)
