@@ -1084,7 +1084,7 @@ def directoryCheck2(outputPath):
     isFile = os.path.isfile(outputPath)
     if isFile:
         return True
-    if outputPath.find > 0:
+    if outputPath.find(".") > 0:
         directoryIn = os.path.dirname(outputPath)
     else:
         directoryIn = os.path.dirname(outputPath+"/")
