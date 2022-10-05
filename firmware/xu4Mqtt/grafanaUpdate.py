@@ -73,6 +73,7 @@ def readLatestTime(hostID,sensorID):
    
 def writeLatestTime(hostID,sensorID,dateTime):
     fileName = latestFolder + "/" + hostID+"_"+sensorID+".json"
+    mSR.directoryCheck2(fileName)
     sensorDictionary = OrderedDict([
                 ("dateTime"            ,str(dateTime))
                 ])
@@ -104,18 +105,18 @@ def syncHostData(hostFound,hostID,hostIP):
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                     if csvLatestDateTime > latestDateTime:
 
-                        for rowData in rowList:
-                            dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                        # for rowData in rowList:
+                        #     dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                             
-                            if dateTimeRow > latestDateTime:
-                                try:
-                                    print("Publishing MQTT Data for sensorID:"+sensorID)
-                                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
-                                    time.sleep(0.001)
-                                    jsonDateTime = dateTimeRow
-                                except Exception as e:
-                                    print(e)
-                                    print("Data row not published")
+                        #     if dateTimeRow > latestDateTime:
+                        #         try:
+                        #             print("Publishing MQTT Data for sensorID:"+sensorID)
+                        #             mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                        #             time.sleep(0.001)
+                        #             jsonDateTime = dateTimeRow
+                        #         except Exception as e:
+                        #             print(e)
+                        #             print("Data row not published")
                         # Write JSON 
                         writeLatestTime(hostID,sensorID,dateTime)
 
