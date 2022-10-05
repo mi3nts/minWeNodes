@@ -19,7 +19,7 @@ mqttBroker          = mD.mqttBroker
 mqttCredentialsFile = mD.mqttCredentialsFile
 
 # FOR MQTT 
-credentials = yaml.load(open(mqttCredentialsFile))
+credentials = yaml.load(open(mqttCredentialsFile),Loader=yaml.FullLoader)
 connected   = False  # Stores the connection status
 broker      = mqttBroker
 port        = mqttPort # Secure port

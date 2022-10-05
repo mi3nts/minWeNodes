@@ -18,8 +18,6 @@ import os
 import nmap, socket
 import yaml
 
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 dataFolder          = mD.dataFolder
 gpsPort             = mD.gpsPort
