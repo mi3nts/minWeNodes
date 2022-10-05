@@ -1086,7 +1086,7 @@ def directoryCheck2(outputPath):
         return True
     if outputPath.find > 0:
         directoryIn = os.path.dirname(outputPath)
-    else: 
+    else:
         directoryIn = os.path.dirname(outputPath+"/")
 
     if not os.path.exists(directoryIn):
@@ -1096,7 +1096,7 @@ def directoryCheck2(outputPath):
     return True;
 
 
-    
+
 
 
 
