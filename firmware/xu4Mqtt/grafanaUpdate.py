@@ -102,7 +102,9 @@ def syncHostData(hostFound,hostID,hostIP):
 
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     jsonDateTime = latestDateTime
+                    print(latestDateTime)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                    print(csvLatestDateTime)
                     if csvLatestDateTime > latestDateTime:
 
                         # for rowData in rowList:
