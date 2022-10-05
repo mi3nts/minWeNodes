@@ -35,10 +35,9 @@ locations = yaml.load(open(locationsFile),Loader=yaml.FullLoader)
 
 
 print(locations)
-repos     = locations['repos']
-rawFolder = locations['rawFolder']
 
-
+repos     = locations['locations']['repos']
+rawFolder = locations['locations']['rawFolder']
 
 def getHostMac():
     scanner = nmap.PortScanner()
