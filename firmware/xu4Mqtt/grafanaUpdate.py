@@ -1,6 +1,7 @@
 # Import tkinter and webview libraries
 from fileinput import filename
 from tkinter import *
+from traceback import print_stack
 import webview
 import glob
 import serial
@@ -91,10 +92,11 @@ def syncHostData(hostFound,hostID,hostIP):
                     sensorID       = csvFile.split("_")[-4]
                     # latestDateTime = 
                     
-                    reader = csv.DictReader(f)
-                    rowList = list(reader)
-                    print(rowList[-1])
-                    print(rowList[-2])
+                    reader            = csv.DictReader(f)
+                    rowList           = list(reader)
+                    csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                    print(csvLatestDateTime)
+
                     # for rowData in rowList:
                     #     try:
                     #         print("Publishing MQTT Data for sensorID:"+sensorID)
