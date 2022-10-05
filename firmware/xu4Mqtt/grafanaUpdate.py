@@ -95,8 +95,8 @@ def gpsToggle(hostFound,hostIP):
             os.system('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
             
             time.sleep(0.1)
-            os.system("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"')
-            
+            out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
+            print(out)
         else:
    
             print("GPS Currently Inactive, Turning GPS On")
@@ -106,9 +106,8 @@ def gpsToggle(hostFound,hostIP):
             time.sleep(0.1)
             os.system('scp ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
             time.sleep(0.1)
-            print("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsReRun.sh"')
-            os.system("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"')
-            
+            out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
+            print(out)
    
 
 
