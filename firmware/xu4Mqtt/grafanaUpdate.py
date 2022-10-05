@@ -23,7 +23,7 @@ dataFolder          = mD.dataFolder
 gpsPort             = mD.gpsPort
 statusJsonFile      = mD.statusJsonFile
 hostsFile           = mD.hostsFile
-locationsFile           = mD.locationsFile
+locationsFile       = mD.locationsFile
 hostsDataFolder     = mD.hostsDataFolder
 statusJsonFile      = mD.statusJsonFile
 hostsStatusJsonFile = mD.hostsStatusJsonFile
@@ -32,6 +32,7 @@ gpsOffJsonFile      = mD.gpsOffJsonFile
 
 hosts     = yaml.load(open(hostsFile),Loader=yaml.FullLoader)
 locations = yaml.load(open(locationsFile),Loader=yaml.FullLoader)
+
 
 repos     = locations['repos']
 rawFolder = locations['rawFolder']
