@@ -71,9 +71,13 @@ def readLatestTime(hostID,sensorID):
     else:
         return datetime.datetime.strptime("2022-10-04 22:40:40.204179",'%Y-%m-%d %H:%M:%S.%f')
    
-
-
-
+def writeLatestTime(hostID,sensorID,dateTime):
+    fileName = latestFolder + "/" + hostID+"_"+sensorID+".json"
+    sensorDictionary = OrderedDict([
+                ("dateTime"            ,str(dateTime))
+                ])
+    with open(fileName, "w") as outfile:
+        outfile.write(sensorDictionary)
 
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
@@ -90,21 +94,33 @@ def syncHostData(hostFound,hostID,hostIP):
             try:
                 with open(csvFile, "r") as f:
                     sensorID       = csvFile.split("_")[-4]
-                    # latestDateTime = 
                     
+                 
                     reader            = csv.DictReader(f)
                     rowList           = list(reader)
-                    csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-                    print(csvLatestDateTime)
 
-                    # for rowData in rowList:
-                    #     try:
-                    #         print("Publishing MQTT Data for sensorID:"+sensorID)
-                    #         mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
-                    #         time.sleep(0.001)
-                    #     except Exception as e:
-                    #         print(e)
-                    #         print("Data row not published")
+                    latestDateTime    = readLatestTime(hostID,sensorID)
+                    jsonDateTime = latestDateTime
+                    csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                    if csvLatestDateTime > latestDateTime:
+
+                        for rowData in rowList:
+                            dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                            
+                            if dateTimeRow > latestDateTime:
+                                try:
+                                    print("Publishing MQTT Data for sensorID:"+sensorID)
+                                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                                    time.sleep(0.001)
+                                    jsonDateTime = dateTimeRow
+                                except Exception as e:
+                                    print(e)
+                                    print("Data row not published")
+                        # Write JSON 
+                        writeLatestTime(hostID,sensorID,dateTime)
+
+                    else:
+                        break
             except Exception as e:
                 print(e)
                 print("Data file not published")
