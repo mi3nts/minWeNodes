@@ -16,25 +16,8 @@ statusJsonFile = mD.statusJsonFile
 
 baudRate  = 9600
 
-
-def gpsToggle():
-    try:    
-        with open(statusJsonFile, 'r') as f:
-            data = json.load(f)
-
-        return data['gps'] == "on" 
-    except Exception as e:
-            
-        print(e)
-        print("GPS Turned Off")
-        return False
-
-    
-
-
-
 def main():
-    gpsToggle()
+    mSR.gpsStatus(statusJsonFile)
     reader = pynmea2.NMEAStreamReader()
     ser = serial.Serial(
     port= gpsPort,\
@@ -60,12 +43,12 @@ def main():
                     dateTime  = datetime.datetime.now()
                     
                     if (dataString.startswith("$GPGGA") and mSR.getDeltaTime(lastGPGGA,delta)):
-                        if gpsToggle():
+                        if mSR.gpsStatus(statusJsonFile):
                             lastGPGGA = time.time()
                             mSR.GPSGPGGA2Write(dataString,dateTime)
                         
                     if (dataString.startswith("$GPRMC") and mSR.getDeltaTime(lastGPRMC,delta)):
-                        if gpsToggle():    
+                        if mSR.gpsStatus(statusJsonFile):    
                             lastGPRMC = time.time()
                             mSR.GPSGPRMC2Write(dataString,dateTime)
                        

@@ -27,7 +27,7 @@ import pynmea2
 from collections import OrderedDict
 import netifaces as ni
 import math
-
+import json
 
 macAddress     = mD.macAddress
 dataFolder     = mD.dataFolder
@@ -148,6 +148,21 @@ def sensorSend(sensorID,sensorData,dateTime):
     if(sensorID=="AS3935"):
         AS3935Write(sensorData, dateTime)
     # End (Added on May 21 st, 2020 )
+
+
+# For Wearable Sensor - Added Oct 5 2022  
+def gpsStatus(fileIn):
+    try:    
+        with open(fileIn, 'r') as f:
+            data = json.load(f)
+
+        return data['gps'] == "on" 
+    except Exception as e:
+        print(e)
+
+    print("GPS Turned Off")
+    return False
+
 
 
 # For QLM RAD Reader - Added April 4 2022      
@@ -1094,6 +1109,8 @@ def directoryCheck2(outputPath):
         os.makedirs(directoryIn)
         return False
     return True;
+
+
 
 
 

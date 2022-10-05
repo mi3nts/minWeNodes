@@ -26,6 +26,8 @@ hostsDataFolder     = mD.hostsDataFolder
 statusJsonFile      = mD.statusJsonFile
 statusFiles         = mD.statusFiles
 hostsStatusJsonFile = mD.hostsStatusJsonFile
+gpsOnJsonFile       = mD.gpsOnJsonFile
+gpsOffJsonFile      = mD.gpsOffJsonFile
 
 
 
@@ -78,32 +80,27 @@ def syncHostData(hostFound,hostID,hostIP):
                 print("Data file not published")
                 print(csvFile)
 
-def gpsToggle(hostFound,hostID,hostIP):
+def gpsToggle(hostFound,hostIP):
     if hostFound:
         mSR.directoryCheck2(hostsStatusJsonFile)
         print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile)
         os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile)
+        if mSR.gpsStatus(hostsStatusJsonFile):
+            print("GPS Currently Active, Turning GPS Off")
+            print('rsync -avzrtu -e "ssh" ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
+        else:
+            print("GPS Currently Active, Turning GPS On")
+            print('rsync -avzrtu -e "ssh" ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
+
+
+
 
 
 
 
 def main():
     hostFound,hostID,hostIP = getHostMac()
-    # syncHostData(hostFound,hostID,hostIP)
     gpsToggle(hostFound,hostID,hostIP)
-    # print("Main")
-    # lk = glob.glob("/home/teamlary/mintsData/*/*/*/*/*/*.csv")
-    # print(lk[10])
-    # with open(lk[10], "r") as f:
-    #     reader = csv.DictReader(f)
-    #     a = list(reader)
-    #     # print(reader)
-    #     # print(a)
-
-    # for lk2 in a:
-    #     print("------------------------")
-    #     print(lk2)
-    #     mL.writeMQTTLatestWearable(lk2,"OPCN3","nodeIDWearable")  
 
 
 if __name__ == "__main__":
