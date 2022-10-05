@@ -24,7 +24,6 @@ statusJsonFile      = mD.statusJsonFile
 hostsFile           = mD.hostsFile
 hostsDataFolder     = mD.hostsDataFolder
 statusJsonFile      = mD.statusJsonFile
-statusFiles         = mD.statusFiles
 hostsStatusJsonFile = mD.hostsStatusJsonFile
 gpsOnJsonFile       = mD.gpsOnJsonFile
 gpsOffJsonFile      = mD.gpsOffJsonFile
