@@ -34,7 +34,7 @@ gpsOffJsonFile      = mD.gpsOffJsonFile
 
 
 
-hosts       = yaml.load(open(hostsFile))
+hosts       = yaml.load(open(hostsFile),Loader=yaml.FullLoader)
 
 def getHostMac():
     scanner = nmap.PortScanner()
