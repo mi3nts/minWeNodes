@@ -68,7 +68,7 @@ def readLatestTime(hostID,sensorID):
         except Exception as e:
             print(e)
     else:
-        return datetime.datetime.strptime("2022-10-04 22:40:40.204179",'%Y-%m/%d %H:%M:%S.%f')
+        return datetime.datetime.strptime("2022-10-04 22:40:40.204179",'%Y-%m-%d %H:%M:%S.%f')
    
 
 
