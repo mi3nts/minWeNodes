@@ -82,32 +82,32 @@ def syncHostData(hostFound,hostID,hostIP):
 def gpsToggle(hostFound,hostIP):
     if hostFound:
         mSR.directoryCheck2(hostsStatusJsonFile)
-        print('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile)
-        os.system('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile)
+        out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
+        # print(out)
+
         if mSR.gpsStatus(hostsStatusJsonFile):
             print("GPS Currently Active, Turning GPS Off")
-            # At this point stop GPS Reader 
-            
             out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
-            print(out)
+            # print(out)
+
             time.sleep(0.1)
-            
             os.system('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
-            
             time.sleep(0.1)
+          
             out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-            print(out)
+            # print(out)
         else:
    
             print("GPS Currently Inactive, Turning GPS On")
             out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
-            print(out)
+            # print(out)
    
             time.sleep(0.1)
             os.system('scp ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
             time.sleep(0.1)
+            
             out = os.popen("ssh teamlary@"+ hostIP+' "cd /home/teamlary/gitHubRepos/minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-            print(out)
+            # print(out)
    
 
 
