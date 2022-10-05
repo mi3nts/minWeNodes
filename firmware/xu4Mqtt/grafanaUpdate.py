@@ -34,8 +34,10 @@ hosts     = yaml.load(open(hostsFile),Loader=yaml.FullLoader)
 locations = yaml.load(open(locationsFile),Loader=yaml.FullLoader)
 
 
+print(locations)
 repos     = locations['repos']
 rawFolder = locations['rawFolder']
+
 
 
 def getHostMac():
