@@ -87,10 +87,11 @@ def gpsToggle(hostFound,hostIP):
         if mSR.gpsStatus(hostsStatusJsonFile):
             print("GPS Currently Active, Turning GPS Off")
             print('rsync -avzrtu -e "ssh" ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
+            os.system('rsync -avzrtu -e "ssh" ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
         else:
-            print("GPS Currently Active, Turning GPS On")
+            print("GPS Currently Inactive, Turning GPS On")
             print('rsync -avzrtu -e "ssh" ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
-
+            os.system('rsync -avzrtu -e "ssh" ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile)
 
 
 
