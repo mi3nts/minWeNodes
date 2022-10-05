@@ -144,6 +144,7 @@ def gpsToggle(hostFound,hostID,hostIP):
 
 def main():
     hostFound,hostID,hostIP = getHostMac()
+    syncHostData(hostFound,hostID,hostIP)
     gpsToggle(hostFound,hostID,hostIP)
 
 
