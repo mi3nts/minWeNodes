@@ -47,6 +47,7 @@ class wearableWindow(QMainWindow):
 
         self.utdText = QtWidgets.QLabel(self)
         self.utdText.setText("The University of Texas at Dallas")
+        self.utdText.setStyleSheet("background:gray") 
         self.utdText.move(75,50)
 
         # self.gpsButton = QtWidgets.QPushButton(self)
