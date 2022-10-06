@@ -78,15 +78,12 @@ def writeLatestTime(hostID,sensorID,dateTime):
     sensorDictionary = OrderedDict([
                 ("dateTime"            ,str(dateTime))
                 ])
-    print(sensorDictionary)
     with open(fileName, "w") as outfile:
         json.dump(sensorDictionary,outfile)
 
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
-        # mSR.directoryCheck2(hostsDataFolder+"/"+hostID+"/")
         mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
-        # os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + hostsDataFolder + "/"+hostID)
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
@@ -99,10 +96,6 @@ def syncHostData(hostFound,hostID,hostIP):
                     rowList           = list(reader)
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-                    print("----------------------------------------------------------------")
-                    print(latestDateTime)
-                    print(csvLatestDateTime)
-                    print("----------------------------------------------------------------")
                     if csvLatestDateTime > latestDateTime:
                         for rowData in rowList:
                             dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
@@ -137,12 +130,10 @@ def gpsToggle(hostFound,hostID,hostIP):
             print("GPS Currently Active, Turning GPS Off")
             out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
             # print(out)
-
             time.sleep(0.1)
             out = os.popen('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile).read()
             #print()
             time.sleep(0.1)
-
             out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
             # print(out)
             
@@ -158,12 +149,10 @@ def gpsToggle(hostFound,hostID,hostIP):
             print("GPS Currently Inactive, Turning GPS On")
             out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
             # print(out)
-   
             time.sleep(0.1)
             out = os.popen('scp ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile).read()
             #print(out)
             time.sleep(0.1)
-            
             out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
             # print(out)
             
@@ -172,8 +161,6 @@ def gpsToggle(hostFound,hostID,hostIP):
         	    ("status"              ,str(11))
                 ])
             mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
-
-
         out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
         print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
     else:
