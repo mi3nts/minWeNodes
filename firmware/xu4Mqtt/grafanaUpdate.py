@@ -83,10 +83,8 @@ def writeLatestTime(hostID,sensorID,dateTime):
     sensorDictionary = OrderedDict([
                 ("dateTime"            ,str(dateTime))
                 ])
-    print(sensorDictionary)
     with open(fileName, "w") as outfile:
-        json.dump(sensorDictionary,fileName)
-
+        outfile.write(sensorDictionary,outfile)
 
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
