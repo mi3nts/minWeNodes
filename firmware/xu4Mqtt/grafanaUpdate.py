@@ -61,13 +61,10 @@ def getHostMac():
 def readLatestTime(hostID,sensorID):
     
     fileName = latestFolder + "/" + hostID+"_"+sensorID+".json"
-    print("====")
-    print(fileName)
-    print(os.path.isfile(fileName))
-    # CHECK DIRECTORY CHECK  
     if os.path.isfile(fileName):
         try:    
-            with open(filename, 'r') as f:
+            with open(fileName, 'r') as f:
+                print("=========")
                 data = json.load(f)
                 print(data)
             return datetime.datetime.strptime(data['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
