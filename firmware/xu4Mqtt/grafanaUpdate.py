@@ -64,10 +64,12 @@ def readLatestTime(hostID,sensorID):
     print("====")
     print(fileName)
     print(os.path.isfile(fileName))
+    # CHECK DIRECTORY CHECK  
     if os.path.isfile(fileName):
         try:    
             with open(filename, 'r') as f:
                 data = json.load(f)
+
             return datetime.datetime.strptime(data['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
 
         except Exception as e:
@@ -82,7 +84,8 @@ def writeLatestTime(hostID,sensorID,dateTime):
                 ("dateTime"            ,str(dateTime))
                 ])
     with open(fileName, "w") as outfile:
-        outfile.write(sensorDictionary)
+        json.dump(sensorDictionary,fileName)
+        
 
 def syncHostData(hostFound,hostID,hostIP):
     if hostFound:
