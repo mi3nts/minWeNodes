@@ -83,6 +83,7 @@ def writeLatestTime(hostID,sensorID,dateTime):
     sensorDictionary = OrderedDict([
                 ("dateTime"            ,str(dateTime))
                 ])
+    print(sensorDictionary)
     with open(fileName, "w") as outfile:
         outfile.write(sensorDictionary,outfile)
 
