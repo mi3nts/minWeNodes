@@ -15,19 +15,25 @@ from PyQt5 import QtWidgets, QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import QUrl
 import sys
 
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 class wearableWindow(QMainWindow):
     def __init__(self):
         super(wearableWindow, self).__init__()
         self.setStyleSheet("background-color: black;")
         self.setGeometry(100,100,1920,75)
+        # self.setGeometry(100,100,1920,1080)
         self.setWindowTitle("MINTS Wearable EOD 001")
        
         self.initUI()
 
     def initUI(self):
+        # self.browser = QWebEngineView()
+        # self.browser.setUrl(QUrl("google.com"))
+        # self.setCentralWidget(self.browser)
 
         # creating label for the UTD Logo 
         self.utdLogo = QLabel(self)
@@ -45,23 +51,34 @@ class wearableWindow(QMainWindow):
         self.mintsLogo.setScaledContents(True)
         self.mintsLogo.setObjectName("Mints Logo")
 
-        self.utdText = QtWidgets.QLabel(self)
-        self.utdText.setText("The University of Texas at Dallas")
-        self.utdText.setStyleSheet("background:gray") 
-        self.utdText.move(75,50)
+        self.infoText = QtWidgets.QLabel(self)
+        self.infoText.setText("UTD       The University of Texas at Dallas       https://www.utdallas.edu/       MINTS-AI       Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society       https://mints.utdallas.edu/       https://github.com/mi3nts       ")
+        self.infoText.setStyleSheet("color: grey;") 
+        self.infoText.adjustSize()
+        self.infoText.move(75,55)
+        
 
-        # self.gpsButton = QtWidgets.QPushButton(self)
-        # self.gpsButton.setText("GPS Toggle")
-        # self.gpsButton.clicked.connect(self.clicked)
+        self.gpsButton = QtWidgets.QPushButton(self)
+        self.gpsButton.setGeometry(QtCore.QRect(80,5,75,45))        
+        self.gpsButton.setText("GPS")
+        self.gpsButton.setStyleSheet("color: yellow;") 
+        self.gpsButton.clicked.connect(self.clicked)
         # self.gpsButton.move(150,50)
 
-    def clicked(self):
-        self.label.setText("You Pressed the Button")
-        self.update()
+        # creating label for the Mints Logo 
+        self.statusBar = QtWidgets.QLabel(self)
+        self.statusBar.setText("Status Bar")
+        self.statusBar.setStyleSheet("color: white;") 
+        self.statusBar.adjustSize()
+        self.statusBar.move(200,12)
 
-    def update(self):
-        self.label.adjustSize()
-    
+ 
+
+    def clicked(self):
+        self.statusBar.setText("You Pressed the Button")
+        self.statusBar.adjustSize()
+ 
+
     
 def window():
     app = QApplication(sys.argv)
