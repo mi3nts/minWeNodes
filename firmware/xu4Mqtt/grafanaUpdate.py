@@ -108,7 +108,7 @@ def syncHostData(hostFound,hostID,hostIP):
                             dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                             if dateTimeRow > latestDateTime:
                                 try:
-                                    print("Publishing MQTT Data for sensorID:"+sensorID+ "for Node: "+ hostID+ "for timestamp: "+ dateTimeRow)
+                                    print("Publishing MQTT Data for sensorID:"+sensorID+ "for Node: "+ hostID+ "for timestamp: "+ str(dateTimeRow))
                                     mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
                                     time.sleep(0.001)
                                     
