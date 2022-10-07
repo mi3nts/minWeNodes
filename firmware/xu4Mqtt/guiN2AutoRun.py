@@ -96,7 +96,6 @@ class wearableWindow(QMainWindow):
         self.statusBar.adjustSize()
         self.statusBar.move(200,12)
 
-        win.show()
 
 
 
