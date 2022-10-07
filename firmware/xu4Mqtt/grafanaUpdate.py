@@ -90,6 +90,7 @@ def syncHostData(hostFound,hostID,hostIP):
         csvDataFiles.sort()
         for csvFile in csvDataFiles:
             try:
+                print(csvFile)
                 with open(csvFile, "r") as f:
                     sensorID       = csvFile.split("_")[-4]
                     reader            = csv.DictReader(f)
