@@ -97,11 +97,12 @@ def syncHostData(hostFound,hostID,hostIP):
                     sensorID       = csvFile.split("_")[-4]
                     reader            = csv.DictReader(f)
                     rowList           = list(reader)
-                    rowList.sort()
+                    # rowList.sort()
                     # print(rowList)
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     # print(latestDateTime)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+
                     if csvLatestDateTime > latestDateTime:
                         for rowData in rowList:
                             dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
