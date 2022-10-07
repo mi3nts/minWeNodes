@@ -244,7 +244,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = wearableWindow()
     win.show()
-    
+    time.sleep(10)
     hostFound,hostID,hostIP = win.getHostMac()
         
     while (True):
