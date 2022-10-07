@@ -246,12 +246,12 @@ if __name__ == "__main__":
     win.show()
     sys.exit(app.exec_()) 
     hostFound,hostID,hostIP = win.getHostMac()
-    
-        while (True):
-            if hostFound:            
-                win.syncHostData(hostFound,hostID,hostIP)
+
+    while (True):
+        if hostFound:            
+            win.syncHostData(hostFound,hostID,hostIP)
                     
-            time.sleep(600)
-            hostFound,hostID,hostIP = win.getHostMac()     
+        time.sleep(600)
+        hostFound,hostID,hostIP = win.getHostMac()     
 
     
