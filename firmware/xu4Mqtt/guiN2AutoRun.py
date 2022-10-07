@@ -244,17 +244,14 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = wearableWindow()
     win.show()
-    time.sleep(10)
-    # hostFound,hostID,hostIP = win.getHostMac()
-        
-    # while (True):
-    #     if hostFound:            
-    #         win.syncHostData(hostFound,hostID,hostIP)
-                
-    #     time.sleep(600)
-    #     hostFound,hostID,hostIP = win.getHostMac()     
-
-
     sys.exit(app.exec_()) 
+    hostFound,hostID,hostIP = win.getHostMac()
+    
+        while (True):
+            if hostFound:            
+                win.syncHostData(hostFound,hostID,hostIP)
+                    
+            time.sleep(600)
+            hostFound,hostID,hostIP = win.getHostMac()     
 
     
