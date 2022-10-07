@@ -87,6 +87,7 @@ def syncHostData(hostFound,hostID,hostIP):
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
+        print(csvDataFiles)
         print(csvDataFiles.sort())
         for csvFile in csvDataFiles:
             try:
