@@ -254,6 +254,7 @@ if __name__ == "__main__":
         time.sleep(600)
         hostFound,hostID,hostIP = win.getHostMac()     
 
-        sys.exit(app.exec_()) 
+
+    sys.exit(app.exec_()) 
 
     
