@@ -96,12 +96,12 @@ class wearableWindow(QMainWindow):
         self.statusBar.adjustSize()
         self.statusBar.move(200,12)
         hostFound,hostID,hostIP = self.getHostMac()
-        while (True):
-            if hostFound:            
-                self.syncHostData(hostFound,hostID,hostIP)
+        # while (True):
+        #     if hostFound:            
+        #         self.syncHostData(hostFound,hostID,hostIP)
                 
-            time.sleep(600)
-            hostFound,hostID,hostIP = self.getHostMac() 
+        #     time.sleep(600)
+        #     hostFound,hostID,hostIP = self.getHostMac() 
 
 
 
@@ -158,10 +158,10 @@ class wearableWindow(QMainWindow):
 
             mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
             os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
-
             csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
-            dateTime = self.readLatestTime(hostID,"BME280")
             for csvFile in csvDataFiles:
+                print("================================================")
+                print(csvFile)
                 try:
                     with open(csvFile, "r") as f:
                         sensorID       = csvFile.split("_")[-4]
@@ -169,25 +169,25 @@ class wearableWindow(QMainWindow):
                         rowList           = list(reader)
                         latestDateTime    = self.readLatestTime(hostID,sensorID)
                         csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+
                         if csvLatestDateTime > latestDateTime:
                             for rowData in rowList:
                                 dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                                 if dateTimeRow > latestDateTime:
                                     try:
-                                        print("Publishing MQTT Data for sensorID:"+sensorID)
+                                        print("Publishing MQTT Data for Node ID:"+hostID+ " ,Sensor: "+ sensorID+ " ,Time Stamp: "+ str(dateTimeRow))
                                         mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
                                         time.sleep(0.001)
-                                        jsonDateTime = dateTimeRow
+                                        
                                     except Exception as e:
                                         print(e)
                                         print("Data row not published")
-                            self.writeLatestTime(hostID,sensorID,jsonDateTime)
+                            self.writeLatestTime(hostID,sensorID,csvLatestDateTime)
                             print("================================================")
-                            print("Latest Date Time for Node:"+ hostID + " ,SensorID:"+ sensorID)
-                            print(jsonDateTime)
+                            print("Latest Date Time for Node:"+ hostID + " SensorID:"+ sensorID)
+                            print(csvLatestDateTime)
                             print("================================================")
-                        else:
-                            break
+
                 except Exception as e:
                     print(e)
                     print("Data file not published")
@@ -239,9 +239,6 @@ class wearableWindow(QMainWindow):
         else:
             print("No Host Found")
             
-
-
-
 
 
 
