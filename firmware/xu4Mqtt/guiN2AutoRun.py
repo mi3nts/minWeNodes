@@ -96,14 +96,6 @@ class wearableWindow(QMainWindow):
         self.statusBar.adjustSize()
         self.statusBar.move(200,12)
 
-        hostFound,hostID,hostIP = self.getHostMac()
-        
-        while (True):
-            if hostFound:            
-                self.syncHostData(hostFound,hostID,hostIP)
-                
-            time.sleep(600)
-            hostFound,hostID,hostIP = self.getHostMac() 
 
 
 
@@ -252,4 +244,16 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = wearableWindow()
     win.show()
-    sys.exit(app.exec_())
+    
+    hostFound,hostID,hostIP = win.getHostMac()
+        
+    while (True):
+        if hostFound:            
+            win.syncHostData(hostFound,hostID,hostIP)
+                
+        time.sleep(600)
+        hostFound,hostID,hostIP = win.getHostMac()     
+
+        sys.exit(app.exec_()) 
+
+    
