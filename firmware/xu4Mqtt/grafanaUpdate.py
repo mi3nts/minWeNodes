@@ -94,6 +94,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     sensorID       = csvFile.split("_")[-4]
                     reader            = csv.DictReader(f)
                     rowList           = list(reader)
+                    print(rowList)
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                     if csvLatestDateTime > latestDateTime:
@@ -102,7 +103,7 @@ def syncHostData(hostFound,hostID,hostIP):
                             if dateTimeRow > latestDateTime:
                                 try:
                                     print("Publishing MQTT Data for sensorID:"+sensorID)
-                                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                                    # mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
                                     time.sleep(0.001)
                                     jsonDateTime = dateTimeRow
                                 except Exception as e:
