@@ -96,14 +96,19 @@ class wearableWindow(QMainWindow):
         self.statusBar.adjustSize()
         self.statusBar.move(200,12)
 
-
+        win.show()
 
 
 
     def clicked(self):
+        
         self.statusBar.setText("You Pressed the Button")
         self.statusBar.adjustSize()
- 
+        hostFound,hostID,hostIP = self.getHostMac()
+        if hostFound:
+            self.statusBar.setText("Host Found")
+            self.statusBar.adjustSize()   
+        self.syncHostData(hostFound,hostID,hostIP)
 
     def getHostMac(self):
         scanner = nmap.PortScanner()
@@ -169,7 +174,10 @@ class wearableWindow(QMainWindow):
                                 dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                                 if dateTimeRow > latestDateTime:
                                     try:
-                                        print("Publishing MQTT Data for Node ID:"+hostID+ " ,Sensor: "+ sensorID+ " ,Time Stamp: "+ str(dateTimeRow))
+                                        strIn = "Publishing MQTT Data for Node ID:"+hostID+ " ,Sensor: "+ sensorID+ " ,Time Stamp: "+ str(dateTimeRow)
+                                        print(strIn)
+                                        self.statusBar.setText(strIn)
+                                        self.statusBar.adjustSize()   
                                         mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
                                         time.sleep(0.001)
                                         
@@ -245,13 +253,13 @@ if __name__ == "__main__":
     win = wearableWindow()
     win.show()
     sys.exit(app.exec_()) 
-    hostFound,hostID,hostIP = win.getHostMac()
+    # hostFound,hostID,hostIP = win.getHostMac()
 
-    while (True):
-        if hostFound:            
-            win.syncHostData(hostFound,hostID,hostIP)
+    # while (True):
+    #     if hostFound:            
+    #         win.syncHostData(hostFound,hostID,hostIP)
                     
-        time.sleep(600)
-        hostFound,hostID,hostIP = win.getHostMac()     
+    #     time.sleep(600)
+    #     hostFound,hostID,hostIP = win.getHostMac()     
 
     
