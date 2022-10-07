@@ -18,7 +18,7 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QUrl
 import sys
 
-from PyQt5.QtWebEngineWidgets import QWebEngineView
+#from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 class wearableWindow(QMainWindow):
     def __init__(self):

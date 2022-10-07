@@ -27,7 +27,7 @@ import nmap, socket
 import yaml
 import json
 
-from PyQt5.QtWebEngineWidgets import QWebEngineView
+#from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 dataFolder          = mD.dataFolder
 gpsPort             = mD.gpsPort
