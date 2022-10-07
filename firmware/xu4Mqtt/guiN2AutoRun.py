@@ -107,6 +107,7 @@ class wearableWindow(QMainWindow):
         if hostFound:
             self.statusBar.setText("Host Found")
             self.statusBar.adjustSize()   
+            time.sleep(5)
         self.syncHostData(hostFound,hostID,hostIP)
 
     def getHostMac(self):
@@ -153,7 +154,9 @@ class wearableWindow(QMainWindow):
 
     def syncHostData(self,hostFound,hostID,hostIP):
         if hostFound:
-
+            self.statusBar.setText("Syncing Data...")
+            self.statusBar.adjustSize()   
+            time.sleep(5)
             mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
             os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
             csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
@@ -175,8 +178,8 @@ class wearableWindow(QMainWindow):
                                     try:
                                         strIn = "Publishing MQTT Data for Node ID:"+hostID+ " ,Sensor: "+ sensorID+ " ,Time Stamp: "+ str(dateTimeRow)
                                         print(strIn)
-                                        self.statusBar.setText(strIn)
-                                        self.statusBar.adjustSize()   
+                                        # self.statusBar.setText(strIn)
+                                        # self.statusBar.adjustSize()   
                                         mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
                                         time.sleep(0.001)
                                         
