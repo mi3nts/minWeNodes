@@ -245,14 +245,14 @@ if __name__ == "__main__":
     win = wearableWindow()
     win.show()
     time.sleep(10)
-    hostFound,hostID,hostIP = win.getHostMac()
+    # hostFound,hostID,hostIP = win.getHostMac()
         
-    while (True):
-        if hostFound:            
-            win.syncHostData(hostFound,hostID,hostIP)
+    # while (True):
+    #     if hostFound:            
+    #         win.syncHostData(hostFound,hostID,hostIP)
                 
-        time.sleep(600)
-        hostFound,hostID,hostIP = win.getHostMac()     
+    #     time.sleep(600)
+    #     hostFound,hostID,hostIP = win.getHostMac()     
 
 
     sys.exit(app.exec_()) 
