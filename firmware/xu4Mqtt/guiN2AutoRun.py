@@ -91,17 +91,19 @@ class wearableWindow(QMainWindow):
 
         # creating label for the Mints Logo 
         self.statusBar = QtWidgets.QLabel(self)
-        self.statusBar.setText("Status Bar")
+        self.statusBar.setText("Looking for Host")
         self.statusBar.setStyleSheet("color: white;") 
         self.statusBar.adjustSize()
         self.statusBar.move(200,12)
+
         hostFound,hostID,hostIP = self.getHostMac()
-        # while (True):
-        #     if hostFound:            
-        #         self.syncHostData(hostFound,hostID,hostIP)
+        
+        while (True):
+            if hostFound:            
+                self.syncHostData(hostFound,hostID,hostIP)
                 
-        #     time.sleep(600)
-        #     hostFound,hostID,hostIP = self.getHostMac() 
+            time.sleep(600)
+            hostFound,hostID,hostIP = self.getHostMac() 
 
 
 
