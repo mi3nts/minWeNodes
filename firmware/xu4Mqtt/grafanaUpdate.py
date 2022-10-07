@@ -88,7 +88,9 @@ def syncHostData(hostFound,hostID,hostIP):
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
         csvDataFiles.sort()
+
         for csvFile in csvDataFiles:
+            print("================================================")
             print(csvFile)
             try:
                 with open(csvFile, "r") as f:
