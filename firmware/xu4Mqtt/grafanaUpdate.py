@@ -97,6 +97,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     sensorID       = csvFile.split("_")[-4]
                     reader            = csv.DictReader(f)
                     rowList           = list(reader)
+                    rowList.sort()
                     # print(rowList)
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     # print(latestDateTime)
@@ -113,6 +114,8 @@ def syncHostData(hostFound,hostID,hostIP):
                                 except Exception as e:
                                     print(e)
                                     print("Data row not published")
+                            else:
+                                break
                         writeLatestTime(hostID,sensorID,jsonDateTime)
                         print("================================================")
                         print("Latest Date Time for Node:"+ hostID + " ,SensorID:"+ sensorID)
