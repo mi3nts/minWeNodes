@@ -109,7 +109,7 @@ def syncHostData(hostFound,hostID,hostIP):
                             if dateTimeRow > latestDateTime:
                                 try:
                                     print("Publishing MQTT Data for sensorID:"+sensorID)
-                                    # mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
                                     time.sleep(0.001)
                                     jsonDateTime = dateTimeRow
                                 except Exception as e:
