@@ -87,7 +87,7 @@ def syncHostData(hostFound,hostID,hostIP):
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
-        dateTime = readLatestTime(hostID,"BME280")
+        print(csvDataFiles)
         for csvFile in csvDataFiles:
             try:
                 with open(csvFile, "r") as f:
@@ -96,7 +96,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     rowList           = list(reader)
                     # print(rowList)
                     latestDateTime    = readLatestTime(hostID,sensorID)
-                    print(latestDateTime)
+                    # print(latestDateTime)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                     if csvLatestDateTime > latestDateTime:
                         for rowData in rowList:
