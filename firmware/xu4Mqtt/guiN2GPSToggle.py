@@ -147,7 +147,7 @@ class wearableWindow(QMainWindow):
 
 
 
-    def gpsToggle(hostFound,hostID,hostIP):
+    def gpsToggle(self,hostFound,hostID,hostIP):
         if hostFound:
             mSR.directoryCheck2(hostsStatusJsonFile)
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
