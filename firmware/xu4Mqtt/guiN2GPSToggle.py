@@ -88,7 +88,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setGeometry(QtCore.QRect(80,5,75,45))        
         self.gpsButton.setText("GPS")
         self.gpsButton.setStyleSheet("color: yellow;") 
-        self.gpsButton.clicked.connect(self.clicked)
+        self.gpsButton.clicked.connect(self.gpsToggle)
         # self.gpsButton.move(150,50)
 
         # creating label for the Mints Logo 
