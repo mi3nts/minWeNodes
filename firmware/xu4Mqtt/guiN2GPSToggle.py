@@ -100,7 +100,7 @@ class wearableWindow(QMainWindow):
         self.statusBar.setText("MINTS Wearable EOD 001")
         self.statusBar.setAlignment(QtCore.Qt.AlignCenter)
         self.statusBar.setStyleSheet("color: white;") 
-        # self.statusBar.adjustSize()
+        self.statusBar.adjustSize()
         # self.statusBar.move(420,5)
 
 
