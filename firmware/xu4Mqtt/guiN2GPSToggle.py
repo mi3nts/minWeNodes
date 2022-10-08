@@ -82,7 +82,7 @@ class wearableWindow(QMainWindow):
         self.infoTextUTD.setText("The University of Texas at Dallas")
         self.infoTextUTD.setAlignment(QtCore.Qt.AlignCenter)
         self.infoTextUTD.setStyleSheet("color: grey;") 
-        self.infoTextUTD.adjustSize()
+        # self.infoTextUTD.adjustSize()
         # self.infoTextUTD.move(75,55)
     
         self.infoTextMints = QtWidgets.QLabel(self)
@@ -90,7 +90,7 @@ class wearableWindow(QMainWindow):
         self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society")
         self.infoTextMints.setAlignment(QtCore.Qt.AlignCenter)
         self.infoTextMints.setStyleSheet("color: grey;") 
-        self.infoTextMints.adjustSize()
+        # self.infoTextMints.adjustSize()
         # self.infoTextMints.move(75,55)
  
         
@@ -100,7 +100,7 @@ class wearableWindow(QMainWindow):
         self.statusBar.setText("MINTS Wearable EOD 001")
         self.statusBar.setAlignment(QtCore.Qt.AlignCenter)
         self.statusBar.setStyleSheet("color: white;") 
-        self.statusBar.adjustSize()
+        # self.statusBar.adjustSize()
         # self.statusBar.move(420,5)
 
 
