@@ -78,7 +78,7 @@ class wearableWindow(QMainWindow):
 
 
         self.infoTextUTD = QtWidgets.QLabel(self)
-        self.infoTextUTD.setGeometry(QtCore.QRect(1920-920,2,920-100,25))
+        self.infoTextUTD.setGeometry(QtCore.QRect(1920-920,3,920-100,25))
         self.infoTextUTD.setText("The University of Texas at Dallas")
         self.infoTextUTD.setAlignment(QtCore.Qt.AlignRight)
         self.infoTextUTD.setStyleSheet("color: grey;") 
