@@ -78,32 +78,39 @@ class wearableWindow(QMainWindow):
 
 
         self.infoTextUTD = QtWidgets.QLabel(self)
-        self.infoTextUTD.setGeometry(QtCore.QRect(1920-1000,0,50,50))
-        self.infoTextUTD.setText("The University of Texas at Dallas\n https://mints.utdallas.edu/")
+        self.infoTextUTD.setGeometry(QtCore.QRect(1920-1000,5,50,50))
+        self.infoTextUTD.setText("The University of Texas at Dallas")
+        self.infoTextUTD.setAlignment(QtCore.Qt.AlignCenter)
         self.infoTextUTD.setStyleSheet("color: grey;") 
         self.infoTextUTD.adjustSize()
         # self.infoTextUTD.move(75,55)
     
         self.infoTextMints = QtWidgets.QLabel(self)
-        self.infoTextMints.setGeometry(QtCore.QRect(1920-1000,25,50,50))
-        self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society\n https://mints.utdallas.edu/")
+        self.infoTextMints.setGeometry(QtCore.QRect(1920-1000,30,50,50))
+        self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society")
+        self.infoTextMints.setAlignment(QtCore.Qt.AlignCenter)
         self.infoTextMints.setStyleSheet("color: grey;") 
         self.infoTextMints.adjustSize()
         # self.infoTextMints.move(75,55)
  
+        
+        # creating label for the Mints Logo 
+        self.statusBar = QtWidgets.QLabel(self)
+        self.statusBar.setGeometry(QtCore.QRect(405,5,510,50))
+        self.statusBar.setAlignment(QtCore.Qt.AlignCenter)
+        self.statusBar.setText("MINTS Wearable EOD 001")
+        self.statusBar.setStyleSheet("color: white;") 
+        self.statusBar.adjustSize()
+        # self.statusBar.move(200,12)
+
+
         self.gpsButton = QtWidgets.QPushButton(self)
         self.gpsButton.setGeometry(QtCore.QRect(5,5,400,40))        
         self.gpsButton.setText("GPS")
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
         
-        # creating label for the Mints Logo 
-        self.statusBar = QtWidgets.QLabel(self)
-        self.statusBar.setGeometry(QtCore.QRect(405,5,510,50))
-        self.statusBar.setText("MINTS Wearable EOD 001")
-        self.statusBar.setStyleSheet("color: white;") 
-        self.statusBar.adjustSize()
-        # self.statusBar.move(200,12)
+
 
     def mainGPS(self):
         hostFound,hostID,hostIP =  self.getHostMac()
