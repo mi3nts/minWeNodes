@@ -62,7 +62,7 @@ class wearableWindow(QMainWindow):
 
         # creating label for the UTD Logo 
         self.utdLogo = QLabel(self)
-        self.utdLogo.setGeometry(QtCore.QRect(1920-95,0,50,50))
+        self.utdLogo.setGeometry(QtCore.QRect(1920-95,5,40,40))
         self.utdLogo.setText("")
         self.utdLogo.setPixmap(QtGui.QPixmap('res/utd.png'))
         self.utdLogo.setScaledContents(True)
@@ -70,7 +70,7 @@ class wearableWindow(QMainWindow):
         
         # creating label for the Mints Logo 
         self.mintsLogo = QLabel(self)
-        self.mintsLogo.setGeometry(QtCore.QRect(1920-50,0,50,50))
+        self.mintsLogo.setGeometry(QtCore.QRect(1920-50,5,40,40))
         self.mintsLogo.setText("")
         self.mintsLogo.setPixmap(QtGui.QPixmap('res/mi3nts.png'))
         self.mintsLogo.setScaledContents(True)
@@ -78,7 +78,7 @@ class wearableWindow(QMainWindow):
 
 
         self.infoTextUTD = QtWidgets.QLabel(self)
-        self.infoTextUTD.setGeometry(QtCore.QRect(1920-1000,5,50,50))
+        self.infoTextUTD.setGeometry(QtCore.QRect(1920-1000,5,900,15))
         self.infoTextUTD.setText("The University of Texas at Dallas")
         self.infoTextUTD.setAlignment(QtCore.Qt.AlignCenter)
         self.infoTextUTD.setStyleSheet("color: grey;") 
@@ -86,7 +86,7 @@ class wearableWindow(QMainWindow):
         # self.infoTextUTD.move(75,55)
     
         self.infoTextMints = QtWidgets.QLabel(self)
-        self.infoTextMints.setGeometry(QtCore.QRect(1920-1000,30,50,50))
+        self.infoTextMints.setGeometry(QtCore.QRect(1920-1000,30,900,15))
         self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society")
         self.infoTextMints.setAlignment(QtCore.Qt.AlignCenter)
         self.infoTextMints.setStyleSheet("color: grey;") 
