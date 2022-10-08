@@ -78,16 +78,15 @@ class wearableWindow(QMainWindow):
 
 
         self.infoTextUTD = QtWidgets.QLabel(self)
-        self.infoTextUTD.setGeometry(QtCore.QRect(1920-920,0,920-100,25))
+        self.infoTextUTD.setGeometry(QtCore.QRect(1920-920,5,920-100,25))
         self.infoTextUTD.setText("The University of Texas at Dallas")
         self.infoTextUTD.setAlignment(QtCore.Qt.AlignRight)
         self.infoTextUTD.setStyleSheet("color: grey;") 
         
         self.infoTextMints = QtWidgets.QLabel(self)
-        self.infoTextMints.setGeometry(QtCore.QRect(1920-920,25,920-100,25))
+        self.infoTextMints.setGeometry(QtCore.QRect(1920-920,27,920-100,25))
         self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society")
         self.infoTextMints.setAlignment(QtCore.Qt.AlignRight)
-        self.infoTextMints.setAlignment(QtCore.Qt.AlignHCenter)        
         self.infoTextMints.setStyleSheet("color: grey;") 
                 
         # creating label for the Mints Logo 
@@ -97,8 +96,8 @@ class wearableWindow(QMainWindow):
         self.statusBar.setAlignment(QtCore.Qt.AlignLeft)
         self.statusBar.setAlignment(QtCore.Qt.AlignVCenter)
         self.statusBar.setStyleSheet("color: white;") 
-        
 
+        
         self.gpsButton = QtWidgets.QPushButton(self)
         self.gpsButton.setGeometry(QtCore.QRect(5,5,90,40))        
         self.gpsButton.setText("GPS")
