@@ -88,7 +88,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setGeometry(QtCore.QRect(80,5,75,45))        
         self.gpsButton.setText("GPS")
         self.gpsButton.setStyleSheet("color: yellow;") 
-        self.gpsButton.clicked.connect(self.gpsToggle)
+        self.gpsButton.clicked.connect(self.mainGPS)
         # self.gpsButton.move(150,50)
 
         # creating label for the Mints Logo 
@@ -97,6 +97,10 @@ class wearableWindow(QMainWindow):
         self.statusBar.setStyleSheet("color: white;") 
         self.statusBar.adjustSize()
         self.statusBar.move(200,12)
+
+    def mainGPS(self):
+        hostFound,hostID,hostIP =  self.getHostMac()
+        self.gpsToggle(hostFound,hostID,hostIP)
 
     
     def getHostMac(self):
