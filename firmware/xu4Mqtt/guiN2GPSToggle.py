@@ -87,6 +87,7 @@ class wearableWindow(QMainWindow):
         self.infoTextMints.setGeometry(QtCore.QRect(1920-920,27,920-100,25))
         self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society")
         self.infoTextMints.setAlignment(QtCore.Qt.AlignRight)
+        self.infoTextMints.setAlignment(QtCore.Qt.AlignVCenter)        
         self.infoTextMints.setStyleSheet("color: grey;") 
                 
         # creating label for the Mints Logo 
