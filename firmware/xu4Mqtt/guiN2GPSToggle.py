@@ -97,8 +97,8 @@ class wearableWindow(QMainWindow):
         # creating label for the Mints Logo 
         self.statusBar = QtWidgets.QLabel(self)
         self.statusBar.setGeometry(QtCore.QRect(405,5,510,50))
-        self.statusBar.setAlignment(QtCore.Qt.AlignCenter)
         self.statusBar.setText("MINTS Wearable EOD 001")
+        self.statusBar.setAlignment(QtCore.Qt.AlignCenter)
         self.statusBar.setStyleSheet("color: white;") 
         self.statusBar.adjustSize()
         # self.statusBar.move(200,12)
