@@ -53,8 +53,7 @@ class wearableWindow(QMainWindow):
     def __init__(self):
         super(wearableWindow, self).__init__()
         self.setStyleSheet("background-color: black;")
-        self.setGeometry(100,100,1920,75)
-        # self.setGeometry(100,100,1920,1080)
+        self.setGeometry(0,1080-50,1920,50)
         self.setWindowTitle("MINTS Wearable EOD 001")
        
         self.initUI()
@@ -63,7 +62,7 @@ class wearableWindow(QMainWindow):
 
         # creating label for the UTD Logo 
         self.utdLogo = QLabel(self)
-        self.utdLogo.setGeometry(QtCore.QRect(0,0,75,75))
+        self.utdLogo.setGeometry(QtCore.QRect(1920-95,0,50,50))
         self.utdLogo.setText("")
         self.utdLogo.setPixmap(QtGui.QPixmap('res/utd.png'))
         self.utdLogo.setScaledContents(True)
@@ -71,32 +70,40 @@ class wearableWindow(QMainWindow):
         
         # creating label for the Mints Logo 
         self.mintsLogo = QLabel(self)
-        self.mintsLogo.setGeometry(QtCore.QRect(1920-75,0,75,75))
+        self.mintsLogo.setGeometry(QtCore.QRect(1920-50,0,50,50))
         self.mintsLogo.setText("")
         self.mintsLogo.setPixmap(QtGui.QPixmap('res/mi3nts.png'))
         self.mintsLogo.setScaledContents(True)
         self.mintsLogo.setObjectName("Mints Logo")
 
-        self.infoText = QtWidgets.QLabel(self)
-        self.infoText.setText("UTD       The University of Texas at Dallas       https://www.utdallas.edu/       MINTS-AI       Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society       https://mints.utdallas.edu/       https://github.com/mi3nts       ")
-        self.infoText.setStyleSheet("color: grey;") 
-        self.infoText.adjustSize()
-        self.infoText.move(75,55)
-        
 
+        self.infoTextUTD = QtWidgets.QLabel(self)
+        self.infoTextUTD.setGeometry(QtCore.QRect(1920-1000,0,50,50))
+        self.infoTextUTD.setText("The University of Texas at Dallas\n https://mints.utdallas.edu/")
+        self.infoTextUTD.setStyleSheet("color: grey;") 
+        self.infoTextUTD.adjustSize()
+        # self.infoTextUTD.move(75,55)
+    
+        self.infoTextMints = QtWidgets.QLabel(self)
+        self.infoTextMints.setGeometry(QtCore.QRect(1920-1000,25,50,50))
+        self.infoTextMints.setText("Multi-Scale Integrated Interactive Intelligent Sensing & Simulation for Actionable Insights in Service of Society\n https://mints.utdallas.edu/")
+        self.infoTextMints.setStyleSheet("color: grey;") 
+        self.infoTextMints.adjustSize()
+        # self.infoTextMints.move(75,55)
+ 
         self.gpsButton = QtWidgets.QPushButton(self)
-        self.gpsButton.setGeometry(QtCore.QRect(80,5,75,45))        
+        self.gpsButton.setGeometry(QtCore.QRect(5,5,400,40))        
         self.gpsButton.setText("GPS")
-        self.gpsButton.setStyleSheet("color: yellow;") 
+        self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
-        # self.gpsButton.move(150,50)
-
+        
         # creating label for the Mints Logo 
         self.statusBar = QtWidgets.QLabel(self)
-        self.statusBar.setText("Status Bar")
+        self.statusBar.setGeometry(QtCore.QRect(405,5,510,50))
+        self.statusBar.setText("MINTS Wearable EOD 001")
         self.statusBar.setStyleSheet("color: white;") 
         self.statusBar.adjustSize()
-        self.statusBar.move(200,12)
+        # self.statusBar.move(200,12)
 
     def mainGPS(self):
         hostFound,hostID,hostIP =  self.getHostMac()
