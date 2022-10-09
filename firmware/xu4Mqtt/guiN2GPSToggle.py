@@ -1,12 +1,17 @@
 # # Import tkinter and webview libraries
-# from tkinter import *
-# import webview
+from tkinter import *
+import webview
   
 # # define an instance of tkinter
-# tk = Tk()
+tk = Tk()
   
 # #  size of the window where we show our website
-# tk.geometry("800x450")
+tk.geometry("800x450")
+
+# # Open website
+webview.create_window('MINTS', 'http://mdash.circ.utdallas.edu:3000/d/central_node_demo/central-node-demo?orgId=1&refresh=5s')
+webview.start()
+
 # Import tkinter and webview libraries
 import datetime
 from mintsXU4 import mintsSensorReader as mSR
@@ -21,9 +26,7 @@ import nmap, socket
 import yaml
 import json
 
-# # Open website
-# webview.create_window('MINTS', 'http://mdash.circ.utdallas.edu:3000/d/central_node_demo/central-node-demo?orgId=1&refresh=5s')
-# webview.start()
+
 from PyQt5 import QtWidgets, QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWidgets import *
