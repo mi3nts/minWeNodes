@@ -132,6 +132,8 @@ class wearableWindow(QMainWindow):
                     return False, 0,0;
         
         self.updateStatusBar("No hosts found")
+        self.gpsButton.setStyleSheet("border-color: white;"
+                                             "color: white;")  
         return False, -1,0;
     def updateStatusBar(self,strIn):
         self.statusBar.setText(strIn)
@@ -206,12 +208,7 @@ class wearableWindow(QMainWindow):
             print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
             updateCurrentGPSStatus(self)
         else:
-            self.updateStatusBar("No Host Found")
-            self.gpsButton.setStyleSheet("border :1px solid ;"
-                                             "border-color: white;"
-                                             "color: white;")            
             time.sleep(1)    
-            self.updateStatusBar(" ")
 
 def updateCurrentGPSStatus(self):
     if(mSR.gpsStatus(hostsStatusJsonFile)):
