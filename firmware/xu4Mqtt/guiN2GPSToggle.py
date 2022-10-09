@@ -213,19 +213,20 @@ class wearableWindow(QMainWindow):
 
 def updateCurrentGPSStatus(self):
     if(mSR.gpsStatus(hostsStatusJsonFile)):
-        self.updateStatusBar("GPS ON")
+
         self.gpsButton.setStyleSheet("border :1px solid ;"
                                              "border-bottom-color : green;"
                                              "color: white;")
         QApplication.processEvents() 
-                
+        self.updateStatusBar("GPS ON")       
         self.updateStatusBar(" ")
     else:
-        self.updateStatusBar("GPS OFF")
+
         self.gpsButton.setStyleSheet("border :1px solid ;"
                                              "border-bottom-color : red;"
                                              "color: white;")
         QApplication.processEvents() 
+        self.updateStatusBar("GPS OFF")
         time.sleep(1)
         self.updateStatusBar(" ")
     
