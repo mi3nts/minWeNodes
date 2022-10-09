@@ -105,8 +105,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
-                    
-        self.getHostMac()
+        self.updateCurrentGPSStatus(self)
 
 
     def mainGPS(self):
@@ -127,8 +126,6 @@ class wearableWindow(QMainWindow):
                 hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","").replace("\n","")
                 if hostID == hostIn['nodeID']:
                     self.updateStatusBar("Host " + hostID + " found @" + ipAddress)
-                    self.syncGPSStatus(True,hostIn['IP'])
-                    self.updateCurrentGPSStatus()
                     return True, hostID,hostIn['IP'];
                 else:
                     print("Host " + hostID + " found with incorrect IP:" + ipAddress)
@@ -136,10 +133,7 @@ class wearableWindow(QMainWindow):
         
         self.updateStatusBar("No hosts found")
         self.gpsButton.setStyleSheet("border-color: white;"
-                                             "color: white;")
-        time.sleep(2)
-        self.updateStatusBar("")
-                                                          
+                                             "color: white;")  
         return False, -1,0;
     def updateStatusBar(self,strIn):
         print(strIn)
@@ -170,10 +164,6 @@ class wearableWindow(QMainWindow):
         with open(fileName, "w") as outfile:
             json.dump(sensorDictionary,outfile)
 
-    def syncGPSStatus(self,hostFound,hostIP):
-        if hostFound:
-            mSR.directoryCheck2(hostsStatusJsonFile)
-            out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
 
 
     def gpsToggle(self,hostFound,hostID,hostIP):
