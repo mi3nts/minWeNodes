@@ -210,12 +210,12 @@ class wearableWindow(QMainWindow):
                 self.updateStatusBar("GPS ON")
                 self.gpsButton.setStyleSheet("border :1px solid green;color: white;")
                 time.sleep(2)
-                self.updateStatusBar(" ")
+                # self.updateStatusBar(" ")
             else:
                 self.updateStatusBar("GPS OFF")
                 self.gpsButton.setStyleSheet("border :1px solid red;color: white;")
                 time.sleep(2)
-                self.updateStatusBar(" ")
+                # self.updateStatusBar(" ")
         else:
             self.updateStatusBar("No Host Found")
         
