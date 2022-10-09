@@ -207,28 +207,28 @@ class wearableWindow(QMainWindow):
                 mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
             print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
-            updateCurrentGPSStatus(self)
+            self.updateCurrentGPSStatus(self)
         else:
             time.sleep(1)    
 
-def updateCurrentGPSStatus(self):
-    if(mSR.gpsStatus(hostsStatusJsonFile)):
+    def updateCurrentGPSStatus(self):
+        if(mSR.gpsStatus(hostsStatusJsonFile)):
 
-        self.gpsButton.setStyleSheet("border :1px solid ;"
-                                             "border-bottom-color : green;"
-                                             "color: white;")
-        QApplication.processEvents() 
-        self.updateStatusBar("GPS ON")       
-        self.updateStatusBar(" ")
-    else:
+            self.gpsButton.setStyleSheet("border :1px solid ;"
+                                                "border-bottom-color : green;"
+                                                "color: white;")
+            QApplication.processEvents() 
+            self.updateStatusBar("GPS ON")       
+            self.updateStatusBar(" ")
+        else:
 
-        self.gpsButton.setStyleSheet("border :1px solid ;"
-                                             "border-bottom-color : red;"
-                                             "color: white;")
-        QApplication.processEvents() 
-        self.updateStatusBar("GPS OFF")
-        time.sleep(1)
-        self.updateStatusBar(" ")
+            self.gpsButton.setStyleSheet("border :1px solid ;"
+                                                "border-bottom-color : red;"
+                                                "color: white;")
+            QApplication.processEvents() 
+            self.updateStatusBar("GPS OFF")
+            time.sleep(1)
+            self.updateStatusBar(" ")
     
 
     
