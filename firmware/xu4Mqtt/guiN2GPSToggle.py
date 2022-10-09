@@ -136,9 +136,10 @@ class wearableWindow(QMainWindow):
                                              "color: white;")  
         return False, -1,0;
     def updateStatusBar(self,strIn):
+        print(strIn)
         self.statusBar.setText(strIn)
         QApplication.processEvents() 
-        print(strIn)
+        time.sleep(1)
 
     def readLatestTime(self,hostID,sensorID):
         
