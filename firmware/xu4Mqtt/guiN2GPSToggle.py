@@ -134,10 +134,10 @@ class wearableWindow(QMainWindow):
         self.updateStatusBar("No hosts found")
         return False, -1,0;
     def updateStatusBar(self,strIn):
-        self.statusBar.setText(strIn) 
-        self.statusBar.adjustSize()
+        self.statusBar.setText(strIn)
+        QApplication.processEvents() 
         print(strIn)
-        time.sleep(5)
+        time.sleep(2)
         # self.statusBar.setText("") 
 
 
