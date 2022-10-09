@@ -92,7 +92,7 @@ class wearableWindow(QMainWindow):
         # creating label for the Mints Logo 
         self.statusBar = QtWidgets.QLabel(self)
         self.statusBar.setGeometry(QtCore.QRect(100,0,1000-100,50))
-        self.statusBar.setText("Test")
+        self.statusBar.setText("")
         self.statusBar.setFont(QFont('Courier', 14))        
         self.statusBar.setAlignment(QtCore.Qt.AlignLeft)
         self.statusBar.setAlignment(QtCore.Qt.AlignVCenter)
