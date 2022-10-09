@@ -109,6 +109,7 @@ class wearableWindow(QMainWindow):
 
 
     def mainGPS(self):
+        updateCurrentGPSStatus(self)
         hostFound,hostID,hostIP =  self.getHostMac()
         self.gpsToggle(hostFound,hostID,hostIP)
 
@@ -137,9 +138,6 @@ class wearableWindow(QMainWindow):
         self.statusBar.setText(strIn)
         QApplication.processEvents() 
         print(strIn)
-        # self.statusBar.setText("") 
-
-
 
     def readLatestTime(self,hostID,sensorID):
         
@@ -207,25 +205,30 @@ class wearableWindow(QMainWindow):
                 mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
             print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
-            if(mSR.gpsStatus(hostsStatusJsonFile)):
-                self.updateStatusBar("GPS ON")
-                self.gpsButton.setStyleSheet("border :1px solid ;"
-                                             "border-bottom-color : green;"
-                                             "color: white;")
-                QApplication.processEvents() 
-                
-                self.updateStatusBar(" ")
-            else:
-                self.updateStatusBar("GPS OFF")
-                self.gpsButton.setStyleSheet("border :1px solid ;"
-                                             "border-bottom-color : red;"
-                                             "color: white;")
-                QApplication.processEvents() 
-
-                self.updateStatusBar(" ")
+            updateCurrentGPSStatus(self)
         else:
             self.updateStatusBar("No Host Found")
-        
+
+
+def updateCurrentGPSStatus(self):
+    if(mSR.gpsStatus(hostsStatusJsonFile)):
+        self.updateStatusBar("GPS ON")
+        self.gpsButton.setStyleSheet("border :1px solid ;"
+                                             "border-bottom-color : green;"
+                                             "color: white;")
+        QApplication.processEvents() 
+                
+        self.updateStatusBar(" ")
+    else:
+        self.updateStatusBar("GPS OFF")
+        self.gpsButton.setStyleSheet("border :1px solid ;"
+                                             "border-bottom-color : red;"
+                                             "color: white;")
+        QApplication.processEvents() 
+        time.sleep(1)
+        self.updateStatusBar(" ")
+    
+
     
 def window():
     app = QApplication(sys.argv)
