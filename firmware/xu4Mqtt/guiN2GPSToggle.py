@@ -143,6 +143,9 @@ class wearableWindow(QMainWindow):
         self.statusBar.setText(strIn)
         QApplication.processEvents() 
         time.sleep(1)
+        self.statusBar.setText("")
+        QApplication.processEvents() 
+
 
     def readLatestTime(self,hostID,sensorID):
         
@@ -226,7 +229,6 @@ class wearableWindow(QMainWindow):
                                                 "color: white;")
             QApplication.processEvents() 
             self.updateStatusBar("GPS ON")       
-            self.updateStatusBar(" ")
         else:
 
             self.gpsButton.setStyleSheet("border :1px solid ;"
@@ -234,8 +236,7 @@ class wearableWindow(QMainWindow):
                                                 "color: white;")
             QApplication.processEvents() 
             self.updateStatusBar("GPS OFF")
-            time.sleep(1)
-            self.updateStatusBar(" ")
+
     
 
     
