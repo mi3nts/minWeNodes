@@ -105,7 +105,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
-        QApplication.processEvents() 
+                    
         self.getHostMac()
 
 
@@ -136,16 +136,16 @@ class wearableWindow(QMainWindow):
         
         self.updateStatusBar("No hosts found")
         self.gpsButton.setStyleSheet("border-color: white;"
-                                             "color: white;")  
+                                             "color: white;")
+        time.sleep(2)
+        self.updateStatusBar("")
+                                                          
         return False, -1,0;
     def updateStatusBar(self,strIn):
         print(strIn)
         self.statusBar.setText(strIn)
         QApplication.processEvents() 
         time.sleep(1)
-        self.statusBar.setText("")
-        QApplication.processEvents() 
-
 
     def readLatestTime(self,hostID,sensorID):
         
@@ -229,6 +229,7 @@ class wearableWindow(QMainWindow):
                                                 "color: white;")
             QApplication.processEvents() 
             self.updateStatusBar("GPS ON")       
+            self.updateStatusBar(" ")
         else:
 
             self.gpsButton.setStyleSheet("border :1px solid ;"
@@ -236,7 +237,8 @@ class wearableWindow(QMainWindow):
                                                 "color: white;")
             QApplication.processEvents() 
             self.updateStatusBar("GPS OFF")
-
+            time.sleep(1)
+            self.updateStatusBar(" ")
     
 
     
