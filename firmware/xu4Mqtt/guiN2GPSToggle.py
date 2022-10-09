@@ -27,7 +27,7 @@ import json
 from PyQt5 import QtWidgets, QtCore, QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QUrl
 import sys
 
@@ -101,6 +101,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton = QtWidgets.QPushButton(self)
         self.gpsButton.setGeometry(QtCore.QRect(5,5,90,40))        
         self.gpsButton.setText("GPS")
+        self.gpsButton.setFont(QFont('Helvetica', 10))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
         
