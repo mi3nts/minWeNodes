@@ -105,7 +105,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
-        # self.updateCurrentGPSStatus()
+        self.getHostMac()
 
 
     def mainGPS(self):
@@ -127,6 +127,7 @@ class wearableWindow(QMainWindow):
                 if hostID == hostIn['nodeID']:
                     self.updateStatusBar("Host " + hostID + " found @" + ipAddress)
                     self.syncGPSStatus(True,hostIn['IP'])
+                    self.updateCurrentGPSStatus()
                     return True, hostID,hostIn['IP'];
                 else:
                     print("Host " + hostID + " found with incorrect IP:" + ipAddress)
