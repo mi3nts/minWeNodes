@@ -125,13 +125,19 @@ class wearableWindow(QMainWindow):
             if ipState == "up":
                 hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","").replace("\n","")
                 if hostID == hostIn['nodeID']:
-                    print("Host " + hostID + " found @" + ipAddress) 
+                    self.updateStatusBar("Host " + hostID + " found @" + ipAddress)
                     return True, hostID,hostIn['IP'];
                 else:
                     print("Host " + hostID + " found with incorrect IP:" + ipAddress)
                     return False, 0,0;
-        print("No hosts found")                
+        
+        self.updateStatusBar("No hosts found")
         return False, -1,0;
+    def updateStatusBar(self,strIn):
+        self.statusBar.setText(strIn) 
+        time.sleep(0.1)
+
+
 
     def readLatestTime(self,hostID,sensorID):
         
@@ -162,18 +168,17 @@ class wearableWindow(QMainWindow):
         if hostFound:
             mSR.directoryCheck2(hostsStatusJsonFile)
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-            # print(out)
+
             dateTime = datetime.datetime.now() 
             if mSR.gpsStatus(hostsStatusJsonFile):
-                print("GPS Currently Active, Turning GPS Off")
+                self.updateStatusBar("GPS Currently Active, Turning GPS Off")
                 out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
-                # print(out)
+
                 time.sleep(0.1)
                 out = os.popen('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile).read()
-                #print()
+
                 time.sleep(0.1)
                 out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-                # print(out)
                 
                 sensorDictionary = OrderedDict([
                     ("dateTime"            ,str(dateTime)),
@@ -184,15 +189,14 @@ class wearableWindow(QMainWindow):
 
             else:
     
-                print("GPS Currently Inactive, Turning GPS On")
+                self.updateStatusBar("GPS Currently Inactive, Turning GPS On")
                 out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
-                # print(out)
                 time.sleep(0.1)
+
                 out = os.popen('scp ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile).read()
-                #print(out)
                 time.sleep(0.1)
+
                 out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-                # print(out)
                 
                 sensorDictionary = OrderedDict([
                     ("dateTime"            ,str(dateTime)),
@@ -200,11 +204,10 @@ class wearableWindow(QMainWindow):
                     ])
                 mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-            print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
+            self.updateStatusBar("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
         else:
-            print("No Host Found")
+            self.updateStatusBar("No Host Found")
         
-
     
 def window():
     app = QApplication(sys.argv)
