@@ -105,6 +105,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
+        QApplication.processEvents() 
         self.getHostMac()
 
 
