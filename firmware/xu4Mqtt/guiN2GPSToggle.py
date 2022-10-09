@@ -135,7 +135,8 @@ class wearableWindow(QMainWindow):
         return False, -1,0;
     def updateStatusBar(self,strIn):
         self.statusBar.setText(strIn) 
-        time.sleep(0.1)
+        time.sleep(0.5)
+        self.statusBar.setText("") 
 
 
 
@@ -204,7 +205,13 @@ class wearableWindow(QMainWindow):
                     ])
                 mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-            self.updateStatusBar("Current GPS Status:" +  mSR.gpsStatus(hostsStatusJsonFile))
+            print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
+            if(mSR.gpsStatus(hostsStatusJsonFile)):
+                print("GPS ON")
+                self.gpsButton.setStyleSheet("border :2px solid green")
+            else:
+                print("GPS OFF")
+                self.gpsButton.setStyleSheet("border :2px solid red")
         else:
             self.updateStatusBar("No Host Found")
         
