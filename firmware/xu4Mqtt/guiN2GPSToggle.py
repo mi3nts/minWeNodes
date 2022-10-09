@@ -114,7 +114,7 @@ class wearableWindow(QMainWindow):
 
     
     def getHostMac(self):
-        self.statusBar.setText("Looking for a host...")
+        self.updateStatusBar("Looking for a host...")
         scanner = nmap.PortScanner()
         hostNodes = hosts['nodeIDs']
         for hostIn in hostNodes:
