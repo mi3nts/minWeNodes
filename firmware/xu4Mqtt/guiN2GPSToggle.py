@@ -101,7 +101,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton = QtWidgets.QPushButton(self)
         self.gpsButton.setGeometry(QtCore.QRect(5,5,90,40))        
         self.gpsButton.setText("GPS")
-        self.gpsButton.setFont(QFont('Helvetica', 15))
+        self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
         
