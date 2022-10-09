@@ -204,7 +204,7 @@ class wearableWindow(QMainWindow):
                     ])
                 mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-            self.updateStatusBar("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
+            self.updateStatusBar("Current GPS Status:" +  mSR.gpsStatus(hostsStatusJsonFile))
         else:
             self.updateStatusBar("No Host Found")
         
