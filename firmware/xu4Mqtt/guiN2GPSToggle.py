@@ -135,6 +135,8 @@ class wearableWindow(QMainWindow):
         return False, -1,0;
     def updateStatusBar(self,strIn):
         self.statusBar.setText(strIn) 
+        self.statusBar.adjustSize()
+        print(strIn)
         time.sleep(5)
         # self.statusBar.setText("") 
 
