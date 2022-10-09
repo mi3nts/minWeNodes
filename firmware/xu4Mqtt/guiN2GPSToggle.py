@@ -131,7 +131,9 @@ class wearableWindow(QMainWindow):
         
         self.updateStatusBar("No hosts found")
         self.gpsButton.setStyleSheet("border-color: white;"
-                                             "color: white;")  
+                                             "color: white;") 
+        time.sleep(1)
+        self.updateStatusBar("No hosts found")                                              
         return False, -1,0;
     def updateStatusBar(self,strIn):
         print(strIn)
