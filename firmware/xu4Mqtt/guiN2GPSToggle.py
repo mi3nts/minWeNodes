@@ -137,7 +137,6 @@ class wearableWindow(QMainWindow):
         self.statusBar.setText(strIn)
         QApplication.processEvents() 
         print(strIn)
-        time.sleep(2)
         # self.statusBar.setText("") 
 
 
