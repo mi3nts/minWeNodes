@@ -105,11 +105,13 @@ class wearableWindow(QMainWindow):
         self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
-        
+        self.gpsButton.setStyleSheet("border :1px solid ;"
+                                             "border-bottom-color : orange;"
+                                             "color: white;")       
 
 
     def mainGPS(self):
-        updateCurrentGPSStatus(self)
+
         hostFound,hostID,hostIP =  self.getHostMac()
         self.gpsToggle(hostFound,hostID,hostIP)
 
