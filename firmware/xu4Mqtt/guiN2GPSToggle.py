@@ -93,7 +93,7 @@ class wearableWindow(QMainWindow):
         self.statusBar = QtWidgets.QLabel(self)
         self.statusBar.setGeometry(QtCore.QRect(100,0,1000-100,50))
         self.statusBar.setText("MINTS Wearable EOD 001")
-        self.statusBar.setFont(QFont('SansSerif', 11))        
+        self.statusBar.setFont(QFont('SansSerif', 10))        
         self.statusBar.setAlignment(QtCore.Qt.AlignLeft)
         self.statusBar.setAlignment(QtCore.Qt.AlignVCenter)
         self.statusBar.setStyleSheet("color: white;") 
@@ -102,7 +102,7 @@ class wearableWindow(QMainWindow):
         self.gpsButton = QtWidgets.QPushButton(self)
         self.gpsButton.setGeometry(QtCore.QRect(5,5,90,40))        
         self.gpsButton.setText("GPS")
-        self.gpsButton.setFont(QFont('SansSerif', 14, QFont.Bold))
+        self.gpsButton.setFont(QFont('SansSerif', 12, QFont.Bold))
         self.gpsButton.setStyleSheet("color: white;") 
         self.gpsButton.clicked.connect(self.mainGPS)
         
