@@ -55,7 +55,7 @@ def getHostMac():
                 print("Host " + hostID + " found @" + ipAddress) 
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("status"               ,str(1.0))
+                    ("status"               ,str(1.1))
                     ])
                 mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)
                 return True, hostID,hostIn['IP'];
