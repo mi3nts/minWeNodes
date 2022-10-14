@@ -75,12 +75,13 @@ def getHostMac():
                 mSR.sensorFinisherWearable(dateTime,hostID,"ERROR001",sensorDictionary)                
                 return False, 0,0;
                     
-    print("No hosts found")                
-    sensorDictionary = OrderedDict([
-                    ("dateTime"             ,str(dateTime)),
-                    ("status"               ,0)
-                    ])
-    mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary)    
+        print("No hosts found")   
+
+        sensorDictionary = OrderedDict([
+                        ("dateTime"             ,str(dateTime)),
+                        ("status"               ,0)
+                        ])
+        mSR.sensorFinisherWearable(dateTime,hostIn,"STATUS001",sensorDictionary)    
     return False, -1,0;
 
 def readLatestTime(hostID,sensorID):
