@@ -117,7 +117,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     ("status"               ,2)
                     ])
         mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary)  
-
+        time.sleep(10)
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
         csvDataFiles.sort()
 
@@ -136,7 +136,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                     
-                    if (sensorID != "STATUS001") and (sensorID != "STATUS001") and (sensorID != "GPSSTATUS001"):
+                    if (sensorID != "STATUS001") and (sensorID != "ERROR001") and (sensorID != "GPSSTATUS001"):
                         if csvLatestDateTime > latestDateTime:
                             for rowData in rowList:
                                 try:
@@ -168,7 +168,7 @@ def syncHostData(hostFound,hostID,hostIP):
                         ("status"               ,3)
                         ])
         mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary) 
-
+        time.sleep(10)
 def main():
     while True:
         hostFound,hostID,hostIP = getHostMac()
