@@ -12,9 +12,9 @@ from mintsXU4 import mintsDefinitions  as mD
 
 dataFolder = mD.dataFolder
 
-# This can be a list 
-wearablesFile   = mD.wearablesFile
-wearablesData   = yaml.load(open(wearablesFile))
+# # This can be a list 
+# wearablesFile   = mD.wearablesFile
+# wearablesData   = yaml.load(open(wearablesFile))
 
 
 import os
@@ -33,7 +33,7 @@ def main():
     print("Gaining Public and Private IPs")
 
     publicIp = get('https://api.ipify.org').text
-    #localIp  = ni.ifaddresses('docker0')[ni.AF_INET][0]['addr'] # Lab Machine
+
     localIp = ni.ifaddresses('eth0')[ni.AF_INET][0]['addr'] # Odroid XU4
 
     sensorDictionary =  OrderedDict([
