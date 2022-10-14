@@ -57,7 +57,7 @@ def getHostMac():
                     ("dateTime"             ,str(dateTime)),
                     ("status"               ,str(1))
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)
+                mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)
                 return True, hostID,hostIn['IP'];
             else:
                 print("Host " + hostID + " found with incorrect IP:" + ipAddress)
@@ -65,14 +65,14 @@ def getHostMac():
                     ("dateTime"             ,str(dateTime)),
                     ("status"                ,str(0))
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)
+                mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)
                 
                 # ADD Incorrect IP Error
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
                     ("error"                ,str(2))
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MERRSTATUS001",sensorDictionary)                
+                mSR.sensorFinisherWearable(dateTime,hostID,"MINTSES001",sensorDictionary)                
                 
                 return False, 0,0;
                     
@@ -81,7 +81,7 @@ def getHostMac():
                     ("dateTime"             ,str(dateTime)),
                     ("status"               ,str(0))
                     ])
-    mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)    
+    mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)    
     return False, -1,0;
 
 def readLatestTime(hostID,sensorID):
@@ -116,7 +116,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     ("dateTime"             ,str(dateTime)),
                     ("status"               ,str(2))
                     ])
-        mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)  
+        mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)  
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
         csvDataFiles.sort()
