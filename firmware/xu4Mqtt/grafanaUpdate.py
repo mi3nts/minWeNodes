@@ -168,7 +168,7 @@ def main():
     while True:
         hostFound,hostID,hostIP = getHostMac()
         # syncHostData(hostFound,hostID,hostIP)
-        time.sleep(30)
+        time.sleep(10)
 
 if __name__ == "__main__":
     print("=============")
