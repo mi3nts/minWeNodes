@@ -180,7 +180,7 @@ class wearableWindow(QMainWindow):
             print("Reading Current GPS Status")
             mSR.directoryCheck2(hostsStatusJsonFile)
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-            self.updateCurrentGPSStatus(hostID)
+            self.updateCurrentGPSStatus(hostID,True)
             self.connected = True
         else:
             self.connected = False
@@ -233,19 +233,20 @@ class wearableWindow(QMainWindow):
 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
             print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
-            self.updateCurrentGPSStatus()
+            self.updateCurrentGPSStatus(hostID,False)
         else:
             time.sleep(1)    
 
-    def updateCurrentGPSStatus(self,hostID):
+    def updateCurrentGPSStatus(self,hostID,justChecking):
         dateTime = datetime.datetime.now() 
         if(mSR.gpsStatus(hostsStatusJsonFile)):
-            sensorDictionary = OrderedDict([
+            if justChecking:
+                sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
                     ("active"               ,str(1)),
                     ("toggled"              ,str(0))
                     ])
-            mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
 
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : green;"
@@ -254,12 +255,13 @@ class wearableWindow(QMainWindow):
             self.updateStatusBar("GPS ON")       
             self.updateStatusBar(" ")
         else:
-            sensorDictionary = OrderedDict([
+            if  justChecking:
+                sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
                     ("active"               ,str(0)),
                     ("toggled"              ,str(0))
                     ])
-            mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
 
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : red;"
