@@ -114,7 +114,7 @@ class wearableWindow(QMainWindow):
 
     def mainGPS(self):
         hostFound,hostID,hostIP =  self.getHostMac()
-        if self.connected:
+        if self.connected and hostFound:
             self.gpsToggle(hostFound,hostID,hostIP)
         else:
             self.gpsCheck(hostFound,hostID,hostIP)
@@ -177,6 +177,7 @@ class wearableWindow(QMainWindow):
 
     def gpsCheck(self,hostFound,hostID,hostIP):
         if hostFound:
+            print("Reading Current GPS Status")
             mSR.directoryCheck2(hostsStatusJsonFile)
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
             self.updateCurrentGPSStatus()
