@@ -116,7 +116,10 @@ def syncHostData(hostFound,hostID,hostIP):
                     ("dateTime"             ,str(dateTime)),
                     ("status"               ,str(2))
                     ])
-        mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)  
+        print(sensorDictionary)
+        # mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS001",sensorDictionary)  
+        mL.writeMQTTLatestWearable(hostID,"MINTSCS001",sensorDictionary) 
+        time.sleep(10)
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
         csvDataFiles.sort()
@@ -164,7 +167,7 @@ def main():
     while True:
         hostFound,hostID,hostIP = getHostMac()
         syncHostData(hostFound,hostID,hostIP)
-        time.sleep(10)
+        time.sleep(30)
 
 if __name__ == "__main__":
     print("=============")
