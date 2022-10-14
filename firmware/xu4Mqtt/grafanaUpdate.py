@@ -169,7 +169,7 @@ def syncHostData(hostFound,hostID,hostIP):
 def main():
     while True:
         hostFound,hostID,hostIP = getHostMac()
-        syncHostData(hostFound,hostID,hostIP)
+        # syncHostData(hostFound,hostID,hostIP)
         time.sleep(30)
 
 if __name__ == "__main__":
