@@ -103,10 +103,10 @@ ipsPorts              = findIPSPorts()
 show2Port             = findPort("CP2104 USB to UART Bridge Controller")
 macAddress            = findMacAddress()
 latestDisplayOn       = False
-latestOn              = False
+latestOn              = True
 airmarPort            = findAirmarPort()
 # For MQTT 
-mqttOn                = False
+mqttOn                = True
 
 mqttCredentialsFile   = 'mintsXU4/credentials.yml'
 hostsFile             = 'mintsXU4/hosts.yml'
