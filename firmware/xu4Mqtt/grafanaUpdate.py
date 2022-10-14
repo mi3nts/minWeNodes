@@ -107,10 +107,11 @@ def writeLatestTime(hostID,sensorID,dateTime):
         json.dump(sensorDictionary,outfile)
 
 def syncHostData(hostFound,hostID,hostIP):
-    dateTime = datetime.datetime.now() 
+
     if hostFound:
         mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
+        dateTime = datetime.datetime.now() 
         sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
                     ("status"               ,2)
@@ -151,17 +152,19 @@ def syncHostData(hostFound,hostID,hostIP):
                         print("Latest Date Time ==> Node:"+ hostID + ", SensorID:"+ sensorID)
                         print(csvLatestDateTime)
                         print("================================================")
-                sensorDictionary = OrderedDict([
-                        ("dateTime"             ,str(dateTime)),
-                        ("status"               ,3)
-                        ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary) 
+
             except Exception as e:
                 print(e)
                 print("Data file not published")
                 print(csvFile)
-
-
+        
+        time.sleep(5)
+        dateTime = datetime.datetime.now() 
+        sensorDictionary = OrderedDict([
+                        ("dateTime"             ,str(dateTime)),
+                        ("status"               ,3)
+                        ])
+        mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary) 
 
 def main():
     while True:
