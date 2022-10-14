@@ -207,7 +207,7 @@ class wearableWindow(QMainWindow):
                 
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(0))
+                    ("active"               ,str(0)),
                     ("toggled"              ,str(1))
                     ])
                 mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
@@ -225,7 +225,7 @@ class wearableWindow(QMainWindow):
 
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(1))
+                    ("active"               ,str(1)),
                     ("toggled"              ,str(1))
                     ])
                 mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
@@ -242,7 +242,7 @@ class wearableWindow(QMainWindow):
         if(mSR.gpsStatus(hostsStatusJsonFile)):
             sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(1))
+                    ("active"               ,str(1)),
                     ("toggled"              ,str(0))
                     ])
             mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
@@ -256,11 +256,11 @@ class wearableWindow(QMainWindow):
         else:
             sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(0))
+                    ("active"               ,str(0)),
                     ("toggled"              ,str(0))
                     ])
             mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
-            
+
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : red;"
                                                 "color: white;")
