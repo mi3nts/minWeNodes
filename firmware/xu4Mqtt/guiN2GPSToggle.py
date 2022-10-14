@@ -207,10 +207,10 @@ class wearableWindow(QMainWindow):
                 
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(0)),
-                    ("toggled"              ,str(1))
+                    ("active"               ,0),
+                    ("toggled"              ,1)
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"GPSSTATUS001",sensorDictionary) 
 
             else:
     
@@ -225,10 +225,10 @@ class wearableWindow(QMainWindow):
 
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(1)),
-                    ("toggled"              ,str(1))
+                    ("active"               ,1),
+                    ("toggled"              ,1)
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"GPSSTATUS001",sensorDictionary) 
 
 
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
@@ -243,10 +243,10 @@ class wearableWindow(QMainWindow):
             if justChecking:
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(1)),
-                    ("toggled"              ,str(0))
+                    ("active"               ,1),
+                    ("toggled"              ,0)
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"GPSSTATUS001",sensorDictionary) 
 
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : green;"
@@ -258,10 +258,10 @@ class wearableWindow(QMainWindow):
             if  justChecking:
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("active"               ,str(0)),
-                    ("toggled"              ,str(0))
+                    ("active"               ,0),
+                    ("toggled"              ,0)
                     ])
-                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"GPSSTATUS001",sensorDictionary) 
 
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : red;"

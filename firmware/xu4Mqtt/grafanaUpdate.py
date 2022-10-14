@@ -151,7 +151,11 @@ def syncHostData(hostFound,hostID,hostIP):
                         print("Latest Date Time ==> Node:"+ hostID + ", SensorID:"+ sensorID)
                         print(csvLatestDateTime)
                         print("================================================")
-
+                sensorDictionary = OrderedDict([
+                        ("dateTime"             ,str(dateTime)),
+                        ("status"               ,3)
+                        ])
+                mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary) 
             except Exception as e:
                 print(e)
                 print("Data file not published")
@@ -162,6 +166,7 @@ def syncHostData(hostFound,hostID,hostIP):
 def main():
     while True:
         hostFound,hostID,hostIP = getHostMac()
+        time.sleep(30)
         syncHostData(hostFound,hostID,hostIP)
         time.sleep(30)
 
