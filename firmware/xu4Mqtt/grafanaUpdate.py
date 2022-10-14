@@ -134,7 +134,7 @@ def syncHostData(hostFound,hostID,hostIP):
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     # print(latestDateTime)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-                    if (sensorID != "STATUS001") or (sensorID != "STATUS001") or (sensorID != "GPSSTATUS001"):
+                    if (sensorID != "STATUS001") and (sensorID != "STATUS001") and (sensorID != "GPSSTATUS001"):
                         if csvLatestDateTime > latestDateTime:
                             for rowData in rowList:
                                 dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
