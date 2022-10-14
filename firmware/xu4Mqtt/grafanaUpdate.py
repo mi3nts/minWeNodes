@@ -134,31 +134,31 @@ def syncHostData(hostFound,hostID,hostIP):
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     # print(latestDateTime)
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-
-                    if csvLatestDateTime > latestDateTime:
-                        for rowData in rowList:
-                            dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-                            if dateTimeRow > latestDateTime:
-                                try:
-                                    print("Publishing MQTT Data ==> Node ID:"+hostID+ ", Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
-                                    mL.writeMQTTLatestWearable(hostID,sensorID,rowData)  
-                                    time.sleep(0.001)
-                                    
-                                except Exception as e:
-                                    print(e)
-                                    print("Data row not published")
-                        writeLatestTime(hostID,sensorID,csvLatestDateTime)
-                        print("================================================")
-                        print("Latest Date Time ==> Node:"+ hostID + ", SensorID:"+ sensorID)
-                        print(csvLatestDateTime)
-                        print("================================================")
+                    if (sensorID is not "STATUS001") or (sensorID is not "STATUS001") or (sensorID is not "GPSSTATUS001"):
+                        if csvLatestDateTime > latestDateTime:
+                            for rowData in rowList:
+                                dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                                if dateTimeRow > latestDateTime:
+                                    try:
+                                        print("Publishing MQTT Data ==> Node ID:"+hostID+ ", Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
+                                        mL.writeMQTTLatestWearable(hostID,sensorID,rowData)  
+                                        time.sleep(0.001)
+                                        
+                                    except Exception as e:
+                                        print(e)
+                                        print("Data row not published")
+                            writeLatestTime(hostID,sensorID,csvLatestDateTime)
+                            print("================================================")
+                            print("Latest Date Time ==> Node:"+ hostID + ", SensorID:"+ sensorID)
+                            print(csvLatestDateTime)
+                            print("================================================")
 
             except Exception as e:
                 print(e)
                 print("Data file not published")
                 print(csvFile)
         
-        time.sleep(5)
+        time.sleep(1)
         dateTime = datetime.datetime.now() 
         sensorDictionary = OrderedDict([
                         ("dateTime"             ,str(dateTime)),
