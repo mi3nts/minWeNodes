@@ -74,7 +74,7 @@ def getHostMac():
                     ("dateTime"             ,str(dateTime)),
                     ("error"                ,str(2))
                     ])
-                mL.writeMQTTLatestWearable(hostID,"MINTSCS001",sensorDictionary) 
+                # mL.writeMQTTLatestWearable(hostID,"MINTSCS001",sensorDictionary) 
                 # mSR.sensorFinisherWearable(dateTime,hostID,"MINTSES001",sensorDictionary)                
                 
                 return False, 0,0;
