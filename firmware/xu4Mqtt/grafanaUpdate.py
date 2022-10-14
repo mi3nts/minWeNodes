@@ -55,7 +55,7 @@ def getHostMac():
                 print("Host " + hostID + " found @" + ipAddress) 
                 sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("status"               ,str(1.1))
+                    ("status"               ,str(1.25))
                     ])
                 mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS002",sensorDictionary)
                 return True, hostID,hostIn['IP'];
@@ -115,7 +115,7 @@ def syncHostData(hostFound,hostID,hostIP):
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
         sensorDictionary = OrderedDict([
                     ("dateTime"             ,str(dateTime)),
-                    ("status"               ,str(2.2))
+                    ("status"               ,str(2.212)),
                     ])
         print(sensorDictionary)
         mSR.sensorFinisherWearable(dateTime,hostID,"MINTSCS002",sensorDictionary)  
@@ -167,7 +167,7 @@ def syncHostData(hostFound,hostID,hostIP):
 def main():
     while True:
         hostFound,hostID,hostIP = getHostMac()
-        # syncHostData(hostFound,hostID,hostIP)
+        syncHostData(hostFound,hostID,hostIP)
         time.sleep(10)
 
 if __name__ == "__main__":
