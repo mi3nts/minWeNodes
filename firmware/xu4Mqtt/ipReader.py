@@ -22,12 +22,6 @@ import os
 
 def main():
     
-#192.168.1.10 is the ip address
-    ret = os.system("ping -o -c 3 -W 3000 192.168.1.10")
-    # while (os.system("ping -o -c 3 -W " + )):
-    #     print "pc still alive"
-
-
     sensorName = "IP"
     dateTimeNow = datetime.datetime.now()
     print("Gaining Public and Private IPs")
