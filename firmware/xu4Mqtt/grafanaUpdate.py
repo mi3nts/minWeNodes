@@ -76,7 +76,7 @@ def getHostMac():
                 return False, 0,0;
                     
         print("No hosts found")   
-
+        print(dateTime)             
         sensorDictionary = OrderedDict([
                         ("dateTime"             ,str(dateTime)),
                         ("status"               ,0)
