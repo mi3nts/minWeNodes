@@ -29,12 +29,34 @@ import netifaces as ni
 import math
 import json
 
-macAddress     = mD.macAddress
-dataFolder     = mD.dataFolder
+macAddress      = mD.macAddress
+dataFolder      = mD.dataFolder
 latestDisplayOn = mD.latestDisplayOn
-dataFolderMQTT = mD.dataFolderMQTT
-latestOn       = mD.latestOn
-mqttOn         = mD.mqttOn
+dataFolderMQTT  = mD.dataFolderMQTT
+latestOn        = mD.latestOn
+mqttOn          = mD.mqttOn
+
+def sensorFinisherWearable(dateTime,hostID,sensorName,sensorDictionary):
+    #Getting Write Path
+    writePath = getWritePathWearable(hostID,sensorName,dateTime)
+    exists = directoryCheck(writePath)
+    writeCSV2(writePath,sensorDictionary,exists)
+    print(writePath)
+    if(mqttOn):
+       mL.writeMQTTLatestWearable(hostID,sensorName,sensorDictionary)
+    if(latestOn):
+       mL.writeJSONLatestWearable(hostID,sensorName,sensorDictionary)
+
+    print("-----------------------------------")
+    print(sensorName)
+    print(sensorDictionary)
+
+
+def getWritePathWearable(nodeID,labelIn,dateTime):
+    #Example  : MINTS_0061_OOPCN3_2019_01_04.csv
+    writePath = dataFolder+"/"+nodeID+"/"+str(dateTime.year).zfill(4)  + "/" + str(dateTime.month).zfill(2)+ "/"+str(dateTime.day).zfill(2)+"/"+ "MINTS_"+ nodeID+ "_" +labelIn + "_" + str(dateTime.year).zfill(4) + "_" +str(dateTime.month).zfill(2) + "_" +str(dateTime.day).zfill(2) +".csv"
+    return writePath;
+
 
 
 def sensorFinisher(dateTime,sensorName,sensorDictionary):

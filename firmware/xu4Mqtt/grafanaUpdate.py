@@ -109,7 +109,7 @@ def syncHostData(hostFound,hostID,hostIP):
                             if dateTimeRow > latestDateTime:
                                 try:
                                     print("Publishing MQTT Data for Node ID:"+hostID+ " ,Sensor: "+ sensorID+ " ,Time Stamp: "+ str(dateTimeRow))
-                                    mL.writeMQTTLatestWearable(rowData,sensorID,hostID)  
+                                    mL.writeMQTTLatestWearable(hostID,sensorID,rowData)  
                                     time.sleep(0.001)
                                     
                                 except Exception as e:
@@ -148,7 +148,7 @@ def gpsToggle(hostFound,hostID,hostIP):
         	    ("status"              ,str(12))
                 ])
 
-            mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
+            mL.writeMQTTLatestWearable(hostID,"MWS001",sensorDictionary) 
 
         else:
    
@@ -166,7 +166,7 @@ def gpsToggle(hostFound,hostID,hostIP):
                 ("dateTime"            ,str(dateTime)),
         	    ("status"              ,str(11))
                 ])
-            mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
+            mL.writeMQTTLatestWearable(hostID,"MWS001",sensorDictionary) 
         out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
         print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
     else:

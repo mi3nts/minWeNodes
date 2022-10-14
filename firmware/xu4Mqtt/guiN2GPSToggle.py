@@ -180,7 +180,7 @@ class wearableWindow(QMainWindow):
             print("Reading Current GPS Status")
             mSR.directoryCheck2(hostsStatusJsonFile)
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-            self.updateCurrentGPSStatus()
+            self.updateCurrentGPSStatus(hostID)
             self.connected = True
         else:
             self.connected = False
@@ -206,11 +206,11 @@ class wearableWindow(QMainWindow):
                 out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
                 
                 sensorDictionary = OrderedDict([
-                    ("dateTime"            ,str(dateTime)),
-                    ("status"              ,str(12))
+                    ("dateTime"             ,str(dateTime)),
+                    ("active"               ,str(0))
+                    ("toggled"              ,str(1))
                     ])
-
-                mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
 
             else:
     
@@ -222,21 +222,31 @@ class wearableWindow(QMainWindow):
                 time.sleep(0.1)
 
                 out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-                
+
                 sensorDictionary = OrderedDict([
-                    ("dateTime"            ,str(dateTime)),
-                    ("status"              ,str(11))
+                    ("dateTime"             ,str(dateTime)),
+                    ("active"               ,str(1))
+                    ("toggled"              ,str(1))
                     ])
-                mL.writeMQTTLatestWearable(sensorDictionary,"MWS001",hostID) 
+                mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+
+
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
             print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
             self.updateCurrentGPSStatus()
         else:
             time.sleep(1)    
 
-    def updateCurrentGPSStatus(self):
-
+    def updateCurrentGPSStatus(self,hostID):
+        dateTime = datetime.datetime.now() 
         if(mSR.gpsStatus(hostsStatusJsonFile)):
+            sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("active"               ,str(1))
+                    ("toggled"              ,str(0))
+                    ])
+            mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : green;"
                                                 "color: white;")
@@ -244,7 +254,13 @@ class wearableWindow(QMainWindow):
             self.updateStatusBar("GPS ON")       
             self.updateStatusBar(" ")
         else:
-
+            sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("active"               ,str(0))
+                    ("toggled"              ,str(0))
+                    ])
+            mSR.sensorFinisherWearable(dateTime,hostID,"MGPSSTATUS001",sensorDictionary) 
+            
             self.gpsButton.setStyleSheet("border :1px solid ;"
                                                 "border-bottom-color : red;"
                                                 "color: white;")

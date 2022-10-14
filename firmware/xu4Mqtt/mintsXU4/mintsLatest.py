@@ -71,12 +71,22 @@ def connect(mqtt_client, mqtt_username, mqtt_password, broker_endpoint, port):
 
     return True
 
+# Added for wearable sensor Oct 13th 2022
+def writeJSONLatestWearable(hostID,sensorName,sensorDictionary):
+    directoryIn  = dataFolder+"/"+hostID+"/"+sensorName+".json"
+    print(directoryIn)
+    try:
+        with open(directoryIn,'w') as fp:
+            json.dump(sensorDictionary, fp)
 
-def writeMQTTLatestWearable(sensorDictionary,sensorName,nodeIDWearable):
+    except:
+        print("Json Data Not Written")
+
+def writeMQTTLatestWearable(hostID,sensorName,sensorDictionary):
 
     if connect(mqtt_client, mqttUN, mqttPW, broker, port):
         try:
-            mqtt_client.publish(nodeIDWearable+"/"+sensorName,json.dumps(sensorDictionary))
+            mqtt_client.publish(hostID+"/"+sensorName,json.dumps(sensorDictionary))
 
         except Exception as e:
             print("[ERROR] Could not publish data, error: {}".format(e))
@@ -95,6 +105,7 @@ def writeMQTTLatest(sensorDictionary,sensorName):
     
     return True
     
+
 
 
 def writeJSONLatest(sensorDictionary,sensorName):
