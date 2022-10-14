@@ -62,6 +62,7 @@ class wearableWindow(QMainWindow):
         self.setGeometry(0,1080-50,1920,50)
         self.setWindowTitle("MINTS Wearable EOD 001")
         self.connected = False
+        self.prevConnected = False
         self.initUI()
 
     def initUI(self):
@@ -180,7 +181,8 @@ class wearableWindow(QMainWindow):
             out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
             self.updateCurrentGPSStatus()
             self.connected = True
-
+        else:
+            self.connected = False
 
 
 
