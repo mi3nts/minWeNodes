@@ -133,20 +133,23 @@ def syncHostData(hostFound,hostID,hostIP):
                     # print(rowList)
                     latestDateTime    = readLatestTime(hostID,sensorID)
                     # print(latestDateTime)
+                    
                     csvLatestDateTime = datetime.datetime.strptime(rowList[-1]['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                    
                     if (sensorID != "STATUS001") and (sensorID != "STATUS001") and (sensorID != "GPSSTATUS001"):
                         if csvLatestDateTime > latestDateTime:
                             for rowData in rowList:
-                                dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
-                                if dateTimeRow > latestDateTime:
-                                    try:
-                                        print("Publishing MQTT Data ==> Node ID:"+hostID+ ", Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
-                                        mL.writeMQTTLatestWearable(hostID,sensorID,rowData)  
-                                        time.sleep(0.001)
-                                        
-                                    except Exception as e:
-                                        print(e)
-                                        print("Data row not published")
+                                try:
+                                    dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
+                                    if dateTimeRow > latestDateTime:
+                                            print("Publishing MQTT Data ==> Node ID:"+hostID+ ", Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
+                                            mL.writeMQTTLatestWearable(hostID,sensorID,rowData)  
+                                            time.sleep(0.001)
+                                            
+                                except Exception as e:
+                                    print(e)
+                                    print("Data row not published")
+
                             writeLatestTime(hostID,sensorID,csvLatestDateTime)
                             print("================================================")
                             print("Latest Date Time ==> Node:"+ hostID + ", SensorID:"+ sensorID)
