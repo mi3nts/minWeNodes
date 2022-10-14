@@ -42,6 +42,8 @@ latestFolder = locations['locations']['latestFolder']
 def getHostMac():
     scanner = nmap.PortScanner()
     hostNodes = hosts['nodeIDs']
+    dateTime = datetime.datetime.now() 
+
     for hostIn in hostNodes:
         ipAddress = hostIn['IP']    
         host = socket.gethostbyname(ipAddress)
@@ -51,15 +53,38 @@ def getHostMac():
             hostID = os.popen("ssh teamlary@"+ ipAddress+' "cat /sys/class/net/eth0/address"').read().replace(":","").replace("\n","")
             if hostID == hostIn['nodeID']:
                 print("Host " + hostID + " found @" + ipAddress) 
+                sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("status"               ,str(1))
+                    ])
+                mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)
                 return True, hostID,hostIn['IP'];
             else:
                 print("Host " + hostID + " found with incorrect IP:" + ipAddress)
+                sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("status"                ,str(0))
+                    ])
+                mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)
+                
+                # ADD Incorrect IP Error
+                sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("error"                ,str(2))
+                    ])
+                mSR.sensorFinisherWearable(dateTime,hostID,"MERRSTATUS001",sensorDictionary)                
+                
                 return False, 0,0;
+                    
     print("No hosts found")                
+    sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("status"               ,str(0))
+                    ])
+    mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)    
     return False, -1,0;
 
 def readLatestTime(hostID,sensorID):
-    
     fileName = latestFolder + "/" + hostID+"_"+sensorID+".json"
     if os.path.isfile(fileName):
         try:    
@@ -68,6 +93,7 @@ def readLatestTime(hostID,sensorID):
             return datetime.datetime.strptime(data['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
 
         except Exception as e:
+            
             print(e)
     else:
         return datetime.datetime.strptime("2022-10-04 22:40:40.204179",'%Y-%m-%d %H:%M:%S.%f')
@@ -82,9 +108,15 @@ def writeLatestTime(hostID,sensorID,dateTime):
         json.dump(sensorDictionary,outfile)
 
 def syncHostData(hostFound,hostID,hostIP):
+    dateTime = datetime.datetime.now() 
     if hostFound:
         mSR.directoryCheck2(dataFolder+"/"+hostID+"/")
         os.system('rsync -avzrtu -e "ssh" teamlary@' + hostIP + ":" + rawFolder + hostID +"/ " + dataFolder + "/" + hostID)
+        sensorDictionary = OrderedDict([
+                    ("dateTime"             ,str(dateTime)),
+                    ("status"               ,str(2))
+                    ])
+        mSR.sensorFinisherWearable(dateTime,hostID,"MCONNSTATUS001",sensorDictionary)  
 
         csvDataFiles = glob.glob(dataFolder+"/"+hostID+ "/*/*/*/*.csv")
         csvDataFiles.sort()
@@ -108,7 +140,7 @@ def syncHostData(hostFound,hostID,hostIP):
                             dateTimeRow = datetime.datetime.strptime(rowData['dateTime'],'%Y-%m-%d %H:%M:%S.%f')
                             if dateTimeRow > latestDateTime:
                                 try:
-                                    print("Publishing MQTT Data ==> Node ID:"+hostID+ ",Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
+                                    print("Publishing MQTT Data ==> Node ID:"+hostID+ ", Sensor ID:"+ sensorID+ ", Time stamp: "+ str(dateTimeRow))
                                     mL.writeMQTTLatestWearable(hostID,sensorID,rowData)  
                                     time.sleep(0.001)
                                     
@@ -126,60 +158,13 @@ def syncHostData(hostFound,hostID,hostIP):
                 print("Data file not published")
                 print(csvFile)
 
-def gpsToggle(hostFound,hostID,hostIP):
-    if hostFound:
-        mSR.directoryCheck2(hostsStatusJsonFile)
-        out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-        # print(out)
-        dateTime = datetime.datetime.now() 
-        if mSR.gpsStatus(hostsStatusJsonFile):
-            print("GPS Currently Active, Turning GPS Off")
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
-            # print(out)
-            time.sleep(0.1)
-            out = os.popen('scp ' + gpsOffJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile).read()
-            #print()
-            time.sleep(0.1)
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-            # print(out)
-            
-            sensorDictionary = OrderedDict([
-                ("dateTime"            ,str(dateTime)),
-        	    ("status"              ,str(12))
-                ])
-
-            mL.writeMQTTLatestWearable(hostID,"MWS001",sensorDictionary) 
-
-        else:
-   
-            print("GPS Currently Inactive, Turning GPS On")
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt && ./gpsHalt.sh"').read()
-            # print(out)
-            time.sleep(0.1)
-            out = os.popen('scp ' + gpsOnJsonFile + ' teamlary@' +hostIP+":"+statusJsonFile).read()
-            #print(out)
-            time.sleep(0.1)
-            out = os.popen("ssh teamlary@"+ hostIP+' "cd ' + repos + 'minWeNodes/firmware/xu4Mqtt &&  nohup ./gpsReRun.sh >/dev/null 2>&1 &"').read()
-            # print(out)
-            
-            sensorDictionary = OrderedDict([
-                ("dateTime"            ,str(dateTime)),
-        	    ("status"              ,str(11))
-                ])
-            mL.writeMQTTLatestWearable(hostID,"MWS001",sensorDictionary) 
-        out = os.popen('rsync -avzrtu -e "ssh" teamlary@' +hostIP+":"+statusJsonFile+" "+ hostsStatusJsonFile).read()
-        print("Current GPS Status:", mSR.gpsStatus(hostsStatusJsonFile))
-    else:
-        print("No Host Found")
-        
-
 
 
 def main():
-    hostFound,hostID,hostIP = getHostMac()
-    syncHostData(hostFound,hostID,hostIP)
-    # gpsToggle(hostFound,hostID,hostIP)
-
+    while True:
+        hostFound,hostID,hostIP = getHostMac()
+        syncHostData(hostFound,hostID,hostIP)
+        time.sleep(10)
 
 if __name__ == "__main__":
     print("=============")
