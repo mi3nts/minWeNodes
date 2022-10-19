@@ -58,10 +58,14 @@ def getHostMac():
                     ("status"               ,1)
                     ])
                 mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary)
+                print("Updating RTC")
                 strRun1 = "ssh teamlary@"+ ipAddress + ' "' + "sudo date -s '$(date)'" + '"'
                 strRun2 = "ssh teamlary@"+ ipAddress + ' "' + "sudo hwclock --systohc" + '"'
-                print(strRun1)
-                print(strRun2)
+                out1 = os.popen(strRun1)
+                out2 = os.popen(strRun2)
+                print(out1)
+                print(out2)
+
                 time.sleep(10)
                 return True, hostID,hostIn['IP'];
             else:
