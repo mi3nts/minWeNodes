@@ -2,6 +2,7 @@ import os
 import sys
 import shutil
 import datetime
+import time
 from mintsXU4 import mintsSensorReader as mSR
 from mintsXU4 import mintsDefinitions as mD
 import yaml
@@ -24,8 +25,10 @@ def main():
     # Deleting for hosts
     for hostIn in hostNodes:
         hostID = hostIn['nodeID']
+         
         for deleteDate in deleteDays:
             try:
+#                time.sleep(.01)
                 dirPath = os.path.normpath(getDeletePathHost(deleteDate,hostID))
                 print("Deleting: "+ dirPath)
                 if os.path.exists(dirPath):
