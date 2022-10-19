@@ -63,8 +63,8 @@ def getHostMac():
                 strRun2 = "ssh teamlary@"+ ipAddress + ' "' + "sudo hwclock --systohc" + '"'
                 out1 = os.popen(strRun1)
                 out2 = os.popen(strRun2)
-                print(out1)
-                print(out2)
+                print(out1.read())
+                print(out2.read())
 
                 time.sleep(10)
                 return True, hostID,hostIn['IP'];
