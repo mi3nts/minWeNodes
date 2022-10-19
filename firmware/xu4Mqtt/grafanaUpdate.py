@@ -58,8 +58,8 @@ def getHostMac():
                     ("status"               ,1)
                     ])
                 mSR.sensorFinisherWearable(dateTime,hostID,"STATUS001",sensorDictionary)
-                strRun1 = "ssh teamlary@"+ ipAddress + '"' + "sudo date -s '$(date)'" + '"'
-                strRun2 = "ssh teamlary@"+ ipAddress + '"' + "sudo hwclock --systohc" + '"'
+                strRun1 = "ssh teamlary@"+ ipAddress + ' "' + "sudo date -s '$(date)'" + '"'
+                strRun2 = "ssh teamlary@"+ ipAddress + ' "' + "sudo hwclock --systohc" + '"'
                 print(strRun1)
                 print(strRun2)
                 time.sleep(10)
