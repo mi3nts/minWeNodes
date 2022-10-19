@@ -3,6 +3,7 @@ import odroid_wiringpi as wpi
 import time
 from collections import OrderedDict
 from mintsXU4 import mintsSensorReader as mSR
+import os
 wpi.wiringPiSetup()
 
 debug  = False 
@@ -26,6 +27,12 @@ def main():
                     ("referenceLevelRaw"      ,str(referenceLevelRaw))
                     ])
             
+            if batteryLevelPercetage< 5:
+                # Shut Down Node 
+                print("Low Battery Shutting Down PC")
+                os.system("shutdown -n now")
+    
+
             mSR.sensorFinisher(dateTime,"MWBL001",sensorDictionary)
             time.sleep(30)
 
