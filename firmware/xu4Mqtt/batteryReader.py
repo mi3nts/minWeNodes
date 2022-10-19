@@ -30,7 +30,7 @@ def main():
             if batteryLevelPercetage< 5:
                 # Shut Down Node 
                 print("Low Battery - Shutting Down PC")
-                os.system("sudo shutdown now")
+#                os.system("sudo shutdown now")
     
 
             mSR.sensorFinisher(dateTime,"MWBL001",sensorDictionary)
