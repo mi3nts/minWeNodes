@@ -7,3 +7,5 @@ Contains firmware for Mints Wearable Nodes
 - Smaller Resister 180 K 
 
 Inspired from https://blog.voltaicsystems.com/reading-charge-level-of-voltaic-usb-battery-packs/
+
+ADC: https://wiki.odroid.com/common/application_note/gpio/wiringpi
