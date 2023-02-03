@@ -73,6 +73,11 @@ Restarting networking (via systemctl): networking.service.
 ```
 sudo nano /etc/network/interfaces
 ```
+```
+# ifupdown has been replaced by netplan(5) on this system.  See
+# /etc/netplan for current configuration.
+# To re-enable ifupdown on this system, you can run:
+#    sudo apt install ifupdown
 auto lo
 iface lo inet loopback
 auto eth0
