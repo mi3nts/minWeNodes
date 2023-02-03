@@ -50,13 +50,29 @@ ip address
     inet6 fe80::9755:f3f7:3198:eaa8/64 scope link dadfailed tentative noprefixroute 
        valid_lft forever preferred_lft forever
  ```
- - Chenge the IP address via the following 
+ - Configure the static IP 
 ``` sudo nano /etc/network/interfaces ```
 ```
 # ifupdown has been replaced by netplan(5) on this system.  See
 # /etc/netplan for current configuration.
 # To re-enable ifupdown on this system, you can run:
 #    sudo apt install ifupdown
+auto lo
+iface lo inet loopback
+auto eth0
+iface eth0 inet static
+  address 10.11.1.18
+  netmask 255.255.255.0
+```
+- Restart network
+```
+teamlary@odroid:~$ sudo /etc/init.d/networking restart
+Restarting networking (via systemctl): networking.service.
+```
+- For this to work when rebooting do the following 
+```
+sudo nano /etc/network/interfaces
+```
 auto lo
 iface lo inet loopback
 auto eth0
