@@ -86,3 +86,5 @@ iface eth0 inet static
   netmask 255.255.255.0
 ```
 
+Inspired by this [link](https://www.youtube.com/watch?v=hhELDJHRz_0&t=606s)
+
