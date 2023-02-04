@@ -62,6 +62,7 @@ def getWritePathWearable(nodeID,labelIn,dateTime):
 
 def sensorFinisher(dateTime,sensorName,sensorDictionary):
     #Getting Write Path
+    #print("TEST 4")
     writePath = getWritePath(sensorName,dateTime)
     exists = directoryCheck(writePath)
     writeCSV2(writePath,sensorDictionary,exists)
