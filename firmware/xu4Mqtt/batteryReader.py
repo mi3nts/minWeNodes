@@ -15,8 +15,7 @@ def main():
             batteryLevelRaw   = wpi.analogRead(25)
             referenceLevelRaw = wpi.analogRead(29)
             batteryLevel      = batteryLevelRaw*(2.1*2)/(4095)
-            #batteryLevelPercetage = batteryLevel*(100/4.2)
-            batteryLevelPercetage = (batteryLevel-2.5)*(100)/(3.25-2.5)
+            batteryLevelPercetage = 2*(batteryLevelRaw-1420)
 
 
             sensorDictionary =  OrderedDict([
