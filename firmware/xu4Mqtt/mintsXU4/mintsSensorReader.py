@@ -487,7 +487,7 @@ def SCD30WriteI2c(sensorData):
     dataLength = 4
     if(len(sensorData) == (dataLength)):
         sensorDictionary =  OrderedDict([
-                ("dateTime"     ,sensorData[0]),
+                ("dateTime"     ,str(sensorData[0])),
         		("c02"          ,sensorData[1]),
             	("temperature"  ,sensorData[2]),
                 ("humidity"     ,sensorData[3]),

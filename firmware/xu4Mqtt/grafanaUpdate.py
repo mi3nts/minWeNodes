@@ -42,11 +42,14 @@ latestFolder = locations['locations']['latestFolder']
 def getHostMac():
     scanner = nmap.PortScanner()
     hostNodes = hosts['nodeIDs']
+    print(hostNodes)
     dateTime = datetime.datetime.now() 
 
     for hostIn in hostNodes:
         ipAddress = hostIn['IP']    
+        print(ipAddress)
         host = socket.gethostbyname(ipAddress)
+        print(host)
         scanner.scan(host, '1', '-v')
         ipState = scanner[host].state()
         if ipState == "up":
