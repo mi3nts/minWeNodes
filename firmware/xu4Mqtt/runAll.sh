@@ -6,6 +6,12 @@ sleep 5
 python3 ips7100ReaderV1.py &
 sleep 5
 
+kill $(pgrep -f 'ips7100ReaderV1Ser.py')
+sleep 5
+python3 ips7100ReaderV1Ser.py &
+sleep 5
+
+
 kill $(pgrep -f 'readI2c.py')
 sleep 5
 python3 readI2c.py &

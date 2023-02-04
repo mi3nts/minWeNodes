@@ -52,6 +52,8 @@ def findIPSPorts():
         currentPort = str(p[2])
         if(currentPort.find("PID=10C4")>=0):
             ipsPorts.append(str(p[0]).split(" ")[0])
+            
+            
     return ipsPorts
   
 def findAirmarPort():
@@ -127,7 +129,7 @@ if __name__ == "__main__":
     print("Due Port             : {0}".format(duePort))
     print("Ozone Port           : {0}".format(ozonePort))
     print("GPS Port             : {0}".format(gpsPort))
-    print("Airmar Port           : {0}".format(airmarPort))
+    print("Airmar Port          : {0}".format(airmarPort))
     print("Show2 Port           : {0}".format(show2Port))
     print("Latest On            : {0}".format(latestDisplayOn))
     print("Latest On                  : {0}".format(latestOn))
@@ -136,10 +138,6 @@ if __name__ == "__main__":
     print("MQTT Broker and Port       : {0}, {1}".format(mqttOn,mqttPort))
 
     
-    #-------------------------------------------#
-    print("Ozone Ports :")
-    for dev in ozonePort:
-        print("\t{0}".format(dev))
     #-------------------------------------------#
     print("IPS Ports :")
     for dev in ipsPorts:

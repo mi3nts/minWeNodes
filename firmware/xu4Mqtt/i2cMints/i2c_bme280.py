@@ -12,7 +12,7 @@ import bme280
 # to_s16 = lambda x: (x + 2**15) % 2**16 - 2**15
 # to_u16 = lambda x: x % 2**16
 
-BME280_I2C_ADDR = 0x76
+BME280_I2C_ADDR = 0x77
 
 class BME280:
 
